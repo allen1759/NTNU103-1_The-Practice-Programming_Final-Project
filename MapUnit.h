@@ -9,6 +9,8 @@ class CMapUnit
 {
 public:
     CMapUnit(std::string name, size_t id, size_t fine, size_t numPlayer);
+    void arriveHere(size_t player_id);
+    void leaveHere(size_t player_id);
 
 protected:
     std::string name_;
