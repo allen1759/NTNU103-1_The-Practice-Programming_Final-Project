@@ -6,7 +6,7 @@
 class CUpgradableUnit: public CMapUnit
 {
 public:
-    CUpgradableUnit()
+    CUpgradableUnit();
 private:
     size_t price_=0, upgrade_price=0, level_=0, host_=0;
 };
