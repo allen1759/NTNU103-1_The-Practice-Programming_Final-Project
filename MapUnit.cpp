@@ -1,11 +1,21 @@
 #include "MapUnit.h"
 
-CMapUnit::CMapUnit(std::string name, size_t id, size_t numPlayer)
-        : name_(name), id_(id)
+CMapUnit::CMapUnit(std::string name, bool buy, size_t id, size_t numPlayer)
+        : name_(name), buyable_(buy), id_(id)
 {
     for(size_t i=0; i<numPlayer; i+=1) {
         who_is_here_.push_back( false );
     }
+}
+
+inline bool CMapUnit::isBuyable() const
+{
+    return buyable_;
+}
+
+inline bool CMapUnit::isHere(size_t player_id) const
+{
+    return who_is_here_[player_id];
 }
 
 inline void CMapUnit::arriveHere(size_t player_id)

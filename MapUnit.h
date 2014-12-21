@@ -8,12 +8,15 @@
 class CMapUnit
 {
 public:
-    CMapUnit(std::string name, size_t id, size_t numPlayer);
+    CMapUnit(std::string name, bool buy, size_t id, size_t numPlayer);
+    bool isBuyable() const;
+    bool isHere(size_t player_id) const;
     void arriveHere(size_t player_id);
     void leaveHere(size_t player_id);
 
 protected:
     std::string name_;
+    bool buyable_;
     size_t id_; //, travel_fine_;
     // fine 放這裡不太好 因為jail不用罰金
     // 給繼承的map多一個 travel_fine_ 好了
@@ -22,5 +25,7 @@ protected:
 
 private:
 };
+
+
 
 #endif // MAPUNIT_H_INCLUDED
