@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="TPP2014-HW4-40147009S-楊智偉-張軒銘-陳柔安-林于珊" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/TPP2014-HW4-40147009S-楊智偉-張軒銘-陳柔安-林于珊" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/TPP2014-HW4-40147009S-楊智偉-張軒銘-陳柔安-林于珊" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="CollectableUnit.cpp" />
+		<Unit filename="CollectableUnit.h" />
+		<Unit filename="Game.cpp" />
+		<Unit filename="Game.h" />
+		<Unit filename="JailUnit.cpp" />
+		<Unit filename="JailUnit.h" />
+		<Unit filename="MapUnit.cpp" />
+		<Unit filename="MapUnit.h" />
+		<Unit filename="Player.cpp" />
+		<Unit filename="Player.h" />
+		<Unit filename="RandomCostUnit.cpp" />
+		<Unit filename="RandomCostUnit.h" />
+		<Unit filename="UpgradableUnit.cpp" />
+		<Unit filename="UpgradableUnit.h" />
+		<Unit filename="WorldMap.cpp" />
+		<Unit filename="WorldMap.h" />
+		<Unit filename="WorldPlayer.cpp" />
+		<Unit filename="WorldPlayer.h" />
+		<Unit filename="main.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
