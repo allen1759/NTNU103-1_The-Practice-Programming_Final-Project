@@ -3,12 +3,17 @@
 
 #include <string>
 #include <vector>
-#include "Player.h"
+
+enum MapType
+{
+    UPGRA, COLLE, RANDOM, JAIL
+};
 
 class CMapUnit
 {
 public:
-    CMapUnit(std::string name, bool buy, size_t id, size_t numPlayer);
+    CMapUnit(std::string name, MapType type, bool buy, size_t id, size_t numPlayer);
+    MapType getType() const;
     bool isBuyable() const;
     bool isHere(size_t player_id) const;
     void arriveHere(size_t player_id);
@@ -16,6 +21,7 @@ public:
 
 protected:
     std::string name_;
+    MapType type_;
     bool buyable_;
     size_t id_; //, travel_fine_;
     // fine 放這裡不太好 因為jail不用罰金
@@ -25,7 +31,5 @@ protected:
 
 private:
 };
-
-
 
 #endif // MAPUNIT_H_INCLUDED
