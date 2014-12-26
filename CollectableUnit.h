@@ -6,6 +6,7 @@
 class CCollectableUnit: public CMapUnit
 {
 public:
+    //
 private:
     size_t host_=0, num_coll_unit_=0;
 };
