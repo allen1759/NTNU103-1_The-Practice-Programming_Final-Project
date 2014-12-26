@@ -14,11 +14,14 @@ public:
     void PrintPlayer();
     void Move(size_t dice);
     int Money(int m);
-    void AddUnit();
+    void AddUnit(); //call this in game
     void AddCollUnit();
     void Stop();
     bool GetDead() { return dead_; }
 
+    size_t coll_unit_() const {
+        return num_coll_unit_;
+    }
 private:
     size_t id_ = 0, location_ = 0;
     int money_ = 30000;

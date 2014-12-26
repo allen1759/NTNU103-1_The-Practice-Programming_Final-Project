@@ -13,7 +13,7 @@ class CRandomCostUnit: public CMapUnit
     size_t price() const;
     //過路費
     size_t fine(const size_t point) const;
-    //主人id (-1表無主地)
+    //主人id
     size_t MyHost_() const;
 
 //類別內容比較

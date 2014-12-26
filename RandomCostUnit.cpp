@@ -6,12 +6,12 @@ size_t CRandomCostUnit::price() const
 {
     return price_;
 }
-    //過路費
+    //過路費(需傳入點數)
 size_t CRandomCostUnit::fine(const size_t point) const
 {
     return point * ( 0.1 * price_ );
 }
-    //主人id (-1表無主地)
+    //主人id
 size_t CRandomCostUnit::MyHost_() const
 {
     return host_;

@@ -9,7 +9,7 @@ size_t CUpgradableUnit::price() const
     //過路費
 size_t CUpgradableUnit::fine() const
 {
-    return ( price_*0.1 ) * level_;
+    return travel_fine_[level_-1];
 }
     //升級金額
 size_t CUpgradableUnit::up_price () const
@@ -29,9 +29,14 @@ bool CUpgradableUnit::isHostRight(const size_t id) const
 }
 //狀態更動
     //賣出
+void CUpgradableUnit::NewHost(const size_t id)
+{
+    host_ = id;
+    buyable_ = false;
+}
     //主人破產
 void CUpgradableUnit::bankrupt()
 {
-    host_ = -1;
     level_ = 1;
+    buyable_ = true;
 }

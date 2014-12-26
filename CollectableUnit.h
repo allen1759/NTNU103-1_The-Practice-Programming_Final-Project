@@ -12,7 +12,7 @@ class CCollectableUnit: public CMapUnit
     //土地金額
     size_t price() const;
     //過路費
-    size_t fine() const;
+    size_t fine(const size_t C_Unit) const;
     //升級金額
     size_t up_price () const;
     //主人id
@@ -24,14 +24,16 @@ class CCollectableUnit: public CMapUnit
 
 //狀態更動
     //賣出
-
+    void NewHost(const size_t id);
     //主人破產
     void bankrupt();
 private:
-    //           地價      升級金額
-    const size_t price_=0, upgrade_price=0;
-    //     地主    建物數量
-    size_t host_=0,num_coll_unit_=0;
+    //           地價      罰金
+    const size_t price_=0, travel_fine_ =0;
+    //     地主
+    size_t host_=0;
+    //      個人認為建物數量綁訂在host身上較佳，
+    //      只要在計算罰金自host身上拿取即可
 };
 
 #endif // COLLECTABLEUNIT_H_INCLUDED
