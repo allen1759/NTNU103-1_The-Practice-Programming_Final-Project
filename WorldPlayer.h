@@ -6,9 +6,16 @@
 class CWorldPlayer
 {
 public:
+    size_t GetMaxNum()
+    {
+        return max_num_player;
+    }
+    void AddPlayer();
+    void PrintPlayers();
 private:
-    static constexpr size_t NumPlayer = 4;
-    CPlayer player[NumPlayer];
+    size_t num_of_player_ = 0;
+    static constexpr size_t max_num_player = 4;
+    CPlayer player[max_num_player];
 };
 
 #endif // WORLDPLAYER_H_INCLUDED
