@@ -27,6 +27,7 @@ class CCollectableUnit: public CMapUnit
     void NewHost(const size_t id);
     //主人破產
     void bankrupt();
+
 private:
     //           地價      罰金
     const size_t price_=0, travel_fine_ =0;

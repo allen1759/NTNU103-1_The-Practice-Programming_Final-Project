@@ -17,13 +17,13 @@ public:
     }
 //類別內容回傳
     //土地金額p
-    size_t price() const;
+    size_t getPrice() const;
     //過路費
-    size_t fine() const;
+    size_t getFine() const;
     //升級金額
-    size_t up_price () const;
+    size_t getUp_price() const;
     //主人id
-    size_t MyHost_() const;
+    size_t getHost() const;
 
 //類別內容比較
     //主人身分
