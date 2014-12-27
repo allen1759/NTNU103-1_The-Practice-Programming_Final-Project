@@ -8,6 +8,16 @@ CMapUnit::CMapUnit(std::string name, bool buy, size_t id, size_t numPlayer)
     }
 }
 
+inline size_t CMapUnit::getID() const
+{
+    return id_;
+}
+
+inline bool CMapUnit::isHostRight(size_t host)const
+{
+    return host == host_;
+}
+
 inline bool CMapUnit::isBuyable() const
 {
     return buyable_;

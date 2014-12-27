@@ -13,12 +13,8 @@ class CRandomCostUnit: public CMapUnit
     size_t getPrice() const;
     //過路費
     size_t getFine(const size_t point) const;
-    //主人id
-    size_t getHost() const;
 
 //類別內容比較
-    //主人身分
-    bool isHostRight(const size_t id) const;
 
 //狀態更動
     //賣出

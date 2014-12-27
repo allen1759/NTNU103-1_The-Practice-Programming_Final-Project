@@ -22,12 +22,8 @@ public:
     size_t getFine() const;
     //升級金額
     size_t getUp_price() const;
-    //主人id
-    size_t getHost() const;
 
 //類別內容比較
-    //主人身分
-    bool isHostRight(const size_t id) const;
 
 //狀態更動
     //賣出
