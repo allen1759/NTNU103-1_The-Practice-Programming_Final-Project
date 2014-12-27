@@ -13,9 +13,10 @@ public:
     void AddPlayer(size_t id);
     void PrintPlayer();
     void Move(size_t dice);
-    int Money(int m);
+    int ModifyMoney(int m);
     void AddUnit(); //call this in game
     void AddCollUnit();
+    void Continue();
     void Stop();
     bool GetDead() { return dead_; }
 

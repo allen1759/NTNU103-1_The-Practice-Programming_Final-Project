@@ -29,7 +29,7 @@ void CPlayer::Move(size_t dice)
     location_ = location_ % 10;
 }
 
-int CPlayer::Money(int m)
+int CPlayer::ModifyMoney(int m)
 {
     money_ += m;
     if(money_ < 0)
@@ -49,7 +49,12 @@ void CPlayer::AddCollUnit()
     num_coll_unit_++;
 }
 
+void CPlayer::Continue()
+{
+    stop_ = false;
+}
+
 void CPlayer::Stop()
 {
-    stop_ = !stop_;
+    stop_ = true;
 }

@@ -2,12 +2,12 @@
 
 //類別內容回傳
     //土地金額
-size_t CCollectableUnit::price() const
+size_t CCollectableUnit::getPrice() const
 {
     return price_;
 }
     //過路費
-size_t CCollectableUnit::fine(const size_t C_Unit) const
+size_t CCollectableUnit::getFine(const size_t C_Unit) const
 {
     return C_Unit * travel_fine_;
 }

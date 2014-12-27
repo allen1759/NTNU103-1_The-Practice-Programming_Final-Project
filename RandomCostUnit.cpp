@@ -7,7 +7,7 @@ size_t CRandomCostUnit::getPrice() const
     return price_;
 }
     //過路費(需傳入點數)
-size_t CRandomCostUnit::getFine(const size_t point) const
+size_t CRandomCostUnit::getFine(size_t point) const
 {
     return point * ( 0.1 * price_ );
 }
@@ -25,5 +25,6 @@ void CRandomCostUnit::NewHost(const size_t id)
 void CRandomCostUnit::bankrupt()
 {
     buyable_ = true;
-    return;
 }
+
+

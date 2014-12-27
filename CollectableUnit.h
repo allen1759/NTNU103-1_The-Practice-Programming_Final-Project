@@ -11,11 +11,9 @@ class CCollectableUnit: public CMapUnit
     { }
 //類別內容回傳
     //土地金額
-    size_t price() const;
+    size_t getPrice() const;
     //過路費
-    size_t fine(const size_t C_Unit) const;
-    //升級金額
-    size_t up_price () const;
+    size_t getFine(const size_t C_Unit) const;
 
 //類別內容比較
 
@@ -24,6 +22,7 @@ class CCollectableUnit: public CMapUnit
     void NewHost(const size_t id);
     //主人破產
     void bankrupt();
+
 
 private:
     //           地價      罰金

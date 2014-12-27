@@ -30,6 +30,7 @@ public:
     void NewHost(const size_t id);
     //主人破產
     void bankrupt();
+
 private:
     //           地價      升級金額
     const size_t price_=0,upgrade_price=0;

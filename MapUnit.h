@@ -19,12 +19,13 @@ public:
     void arriveHere(size_t player_id);
     void leaveHere(size_t player_id);
 
-    //virtual void gothoughHere(CPlayer &player) = 0;
+    virtual void display() const;
 
 protected:
     std::string name_;
     bool buyable_;
-    size_t id_; //, travel_fine_;
+    size_t id_;
+    //size_t travel_fine_;
     // fine 放這裡不太好 因為jail不用罰金
     // 給繼承的map多一個 travel_fine_ 好了
     size_t host_ = nullHost;

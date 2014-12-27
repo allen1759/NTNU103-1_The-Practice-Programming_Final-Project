@@ -6,13 +6,13 @@
 class CRandomCostUnit: public CMapUnit
 {
     CRandomCostUnit() = default;
-    CRandomCostUnit(std::string name, bool buy, size_t id, size_t numPlayer,const size_t price)
-    :CMapUnit(name,buy,id,numPlayer),price_(price),host_(0) { }
+    CRandomCostUnit(const std::string &name, bool buy, size_t id, size_t numPlayer,const size_t price)
+    :CMapUnit(name,buy,id,numPlayer),price_(price) { }
 //類別內容回傳
     //土地金額
     size_t getPrice() const;
     //過路費
-    size_t getFine(const size_t point) const;
+    size_t getFine(size_t point) const;
 
 //類別內容比較
 
@@ -21,9 +21,10 @@ class CRandomCostUnit: public CMapUnit
     void NewHost(const size_t id);
     //主人破產
     void bankrupt();
+
 private:
-    //地價          地主
-    size_t price_=0,host_=0;
+    //地價
+    size_t price_=0;
 
 };
 

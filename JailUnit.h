@@ -6,6 +6,7 @@
 class CJailUnit: public CMapUnit
 {
 public:
+
 private:
 };
 
