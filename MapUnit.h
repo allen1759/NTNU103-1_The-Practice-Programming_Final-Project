@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-
+#include "Player.h"
 
 class CMapUnit
 {
@@ -14,6 +14,8 @@ public:
     bool isHere(size_t player_id) const;
     void arriveHere(size_t player_id);
     void leaveHere(size_t player_id);
+
+    //virtual void gothoughHere(CPlayer &player) = 0;
 
 protected:
     std::string name_;

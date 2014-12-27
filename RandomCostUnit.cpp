@@ -2,17 +2,17 @@
 
 //類別內容回傳
     //土地金額
-size_t CRandomCostUnit::price() const
+size_t CRandomCostUnit::getPrice() const
 {
     return price_;
 }
     //過路費(需傳入點數)
-size_t CRandomCostUnit::fine(const size_t point) const
+size_t CRandomCostUnit::getFine(const size_t point) const
 {
     return point * ( 0.1 * price_ );
 }
     //主人id
-size_t CRandomCostUnit::MyHost_() const
+size_t CRandomCostUnit::getHost() const
 {
     return host_;
 }
