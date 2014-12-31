@@ -12,7 +12,7 @@ class CRandomCostUnit: public CMapUnit
     //土地金額
     size_t getPrice() const;
     //過路費
-    size_t getFine(const size_t dice) const;
+    virtual size_t getFine(const size_t dice) const;
 
 //類別內容比較
 
