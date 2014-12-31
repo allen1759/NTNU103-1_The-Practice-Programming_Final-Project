@@ -15,15 +15,16 @@ size_t CRandomCostUnit::getFine(size_t point) const
 //類別內容比較
 //狀態更動
     //賣出
-void CRandomCostUnit::NewHost(const size_t id)
+void CRandomCostUnit::NewHost(CPlayer *P1)
 {
-    host_ = id;
+    host_ = P1;
     buyable_ = false;
     return;
 }
     //主人破產
 void CRandomCostUnit::bankrupt()
 {
+    host_ = nullptr;
     buyable_ = true;
 }
 

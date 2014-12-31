@@ -6,7 +6,9 @@
 class CJailUnit: public CMapUnit
 {
 public:
+    CJailUnit(std::string name,size_t id):CMapUnit(name,id){}
 
+    //void StopPlayer(CPlayer &player)const {player.Frozen();}
 private:
 };
 

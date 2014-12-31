@@ -19,7 +19,7 @@ class CCollectableUnit: public CMapUnit
 
 //狀態更動
     //賣出
-    void NewHost(const size_t id);
+    void NewHost(CPlayer *P1);
     //主人破產
     void bankrupt();
 

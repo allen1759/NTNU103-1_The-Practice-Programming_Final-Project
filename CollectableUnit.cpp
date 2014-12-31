@@ -16,9 +16,9 @@ size_t CCollectableUnit::getFine(const size_t C_Unit) const
 
 //狀態更動
     //賣出
-void CCollectableUnit::NewHost(const size_t id)
+void CCollectableUnit::NewHost(CPlayer *P1)
 {
-    host_ = id;
+    host_ = P1;
     buyable_ = false;
 }
     //主人破產

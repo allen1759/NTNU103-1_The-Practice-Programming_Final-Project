@@ -14,9 +14,9 @@ inline size_t CMapUnit::getID() const
     return id_;
 }
 
-inline bool CMapUnit::isHostRight(size_t host)const
+inline bool CMapUnit::isHostRight(const CPlayer *host)const
 {
-    return host == host_;
+    return (host == host_);
 }
 
 inline bool CMapUnit::isBuyable() const
@@ -42,7 +42,7 @@ inline void CMapUnit::leaveHere(size_t player_id)
 void CMapUnit::display() const
 {
     std::cout << "=";
-    for(int i=0; i<who_is_here_.size(); i+=1)
+    for(size_t i=0; i<who_is_here_.size(); i+=1)
     {
         if(who_is_here_[i]) std::cout << i;
         else std::cout << " ";
