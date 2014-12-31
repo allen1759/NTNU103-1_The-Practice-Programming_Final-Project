@@ -1,8 +1,8 @@
 #include "MapUnit.h"
 #include <iostream>
 
-CMapUnit::CMapUnit(std::string name, bool buy, size_t id, size_t numPlayer)
-        : name_(name), buyable_(buy), id_(id)
+CMapUnit::CMapUnit (std::string name, bool buy, size_t id,size_t numPlayer)
+:name_(name),buyable_(buy),id_(id)
 {
     for(size_t i=0; i<numPlayer; i+=1) {
         who_is_here_.push_back( false );

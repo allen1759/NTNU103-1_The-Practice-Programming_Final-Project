@@ -7,9 +7,9 @@ size_t CCollectableUnit::getPrice() const
     return price_;
 }
     //過路費
-size_t CCollectableUnit::getFine(const size_t C_Unit) const
+size_t CCollectableUnit::getFine(const size_t dice) const
 {
-    return C_Unit * travel_fine_;
+    return host_->coll_unit_() * travel_fine_;
 }
 
 //類別內容比較
@@ -24,5 +24,6 @@ void CCollectableUnit::NewHost(CPlayer *P1)
     //主人破產
 void CCollectableUnit::bankrupt()
 {
+    host_ = nullptr;
     buyable_ = true;
 }

@@ -8,10 +8,8 @@
 class CMapUnit
 {
 public:
+    CMapUnit(std::string name, bool buy, size_t id,size_t numPlayer);
 
-    CMapUnit() = default;
-    CMapUnit(std::string n1,size_t id) :name_(n1),buyable_(false),id_(id) {}
-    CMapUnit(std::string name, bool buy, size_t id, size_t numPlayer);
     size_t getID() const;
     bool isHostRight(const CPlayer *host) const;
     bool isBuyable() const;

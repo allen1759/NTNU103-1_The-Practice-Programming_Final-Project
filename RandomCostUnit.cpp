@@ -7,9 +7,9 @@ size_t CRandomCostUnit::getPrice() const
     return price_;
 }
     //過路費(需傳入點數)
-size_t CRandomCostUnit::getFine(size_t point) const
+size_t CRandomCostUnit::getFine(const size_t dice) const
 {
-    return point * ( 0.1 * price_ );
+    return dice * ( travel_fine_ );
 }
 
 //類別內容比較

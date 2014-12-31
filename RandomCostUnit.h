@@ -6,16 +6,14 @@
 
 class CRandomCostUnit: public CMapUnit
 {
-    CRandomCostUnit() = default;
-    CRandomCostUnit(const std::string &name, size_t id, size_t numPlayer,const size_t price)
-    :CMapUnit(name,true,id,numPlayer),price_(price) { }
+    CRandomCostUnit(const std::string &name, size_t id, size_t numPlayer,size_t price,size_t fine)
+    :CMapUnit(name,true,id,numPlayer),price_(price),travel_fine_(fine) { }
 //類別內容回傳
     //土地金額
     size_t getPrice() const;
     //過路費
-    size_t getFine(size_t point) const;
+    size_t getFine(const size_t dice) const;
 
-    //virtual size_t getFine(size_t dice) const;
 //類別內容比較
 
 //狀態更動
@@ -25,8 +23,8 @@ class CRandomCostUnit: public CMapUnit
     void bankrupt();
 
 private:
-    size_t price_=0;        //地價
-    size_t unit_fine_ = 0;  //罰金
+    size_t price_= 0;         //地價
+    size_t travel_fine_ = 0;  //罰金
 };
 
 #endif // RANDOMCOSTUNIT_H_INCLUDED
