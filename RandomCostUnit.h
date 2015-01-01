@@ -6,8 +6,9 @@
 
 class CRandomCostUnit: public CMapUnit
 {
+public:
     CRandomCostUnit(const std::string &name, size_t id, size_t numPlayer,size_t price,size_t fine)
-    :CMapUnit(name,true,id,numPlayer),price_(price),travel_fine_(fine) { }
+        :CMapUnit(name,true,id,numPlayer),price_(price),travel_fine_(fine) { }
 //類別內容回傳
     //土地金額
     size_t getPrice() const;

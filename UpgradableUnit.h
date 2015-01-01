@@ -8,7 +8,7 @@
 class CUpgradableUnit: public CMapUnit
 {
 public:
-    CUpgradableUnit(std::string name, bool buy, size_t id, size_t numPlayer,const size_t price,const size_t upgrade,const std::vector<int>f1);
+    CUpgradableUnit(const std::string & name, size_t id, size_t numPlayer,size_t price,size_t upgrade,const std::vector<size_t> & f1);
 //類別內容回傳
     //土地金額p
     size_t getPrice() const;
@@ -28,7 +28,7 @@ public:
 private:
     //           地價      升級金額
     const size_t price_=0,upgrade_price=0;
-    std::vector <int> travel_fine_;
+    std::vector <size_t> travel_fine_;
     //     等級
     size_t level_ = 1;
 };

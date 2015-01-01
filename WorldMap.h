@@ -2,6 +2,10 @@
 #define WORLDMAP_H_INCLUDED
 
 #include "MapUnit.h"
+#include "UpgradableUnit.h"
+#include "CollectableUnit.h"
+#include "RandomCostUnit.h"
+#include "JailUnit.h"
 #include <vector>
 
 class CWorldMap
