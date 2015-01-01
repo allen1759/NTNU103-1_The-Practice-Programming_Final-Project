@@ -39,10 +39,6 @@ inline void CMapUnit::leaveHere(size_t player_id)
     who_is_here_[player_id] = false;
 }
 
-size_t CMapUnit::getFine(const size_t dice) const
-{
-    return dice;
-}
 
 void CMapUnit::display() const
 {

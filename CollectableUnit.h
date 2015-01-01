@@ -5,16 +5,16 @@
 
 class CCollectableUnit: public CMapUnit
 {
-    CCollectableUnit(const std::string &name, bool buy, size_t id,size_t numPlayer,const size_t price)
-    :CMapUnit(name,buy,id,numPlayer),price_(price)
+public:
+    CCollectableUnit(const std::string &name, size_t id,size_t numPlayer,const size_t price)
+    :CMapUnit(name,true,id,numPlayer),price_(price)
     { }
 //類別內容回傳
     //土地金額
     size_t getPrice() const;
     //過路費 ( 統一傳 dice )
-    virtual size_t getFine(const size_t dice) const;
+    virtual size_t getFine(const size_t dice) const override;
 
-//類別內容比較
 
 //狀態更動
     //賣出
