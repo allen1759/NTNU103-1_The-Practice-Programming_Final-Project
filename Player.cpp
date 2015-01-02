@@ -37,6 +37,7 @@ int CPlayer::ModifyMoney(int m)
         dead_ = true;
         return -1;
     }
+    return money_;
 }
 
 void CPlayer::AddUnit()

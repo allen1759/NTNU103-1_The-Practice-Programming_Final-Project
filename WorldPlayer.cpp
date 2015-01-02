@@ -10,7 +10,7 @@ void CWorldPlayer::AddPlayer()
     cin >> num_of_player_;
     if(num_of_player_ > max_num_player ) num_of_player_ = max_num_player;
 
-    for(int i=0; i < num_of_player_; i++)
+    for(size_t i=0; i < num_of_player_; i++)
     {
         player[num_of_player_].AddPlayer(num_of_player_);
         num_of_player_++;
@@ -19,7 +19,7 @@ void CWorldPlayer::AddPlayer()
 
 void CWorldPlayer::PrintPlayers()
 {
-    for(int i=0; i<num_of_player_; i++)
+    for(size_t i=0; i<num_of_player_; i++)
     {
         if(player[i].GetDead() == false)
         {
