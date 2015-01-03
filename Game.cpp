@@ -7,6 +7,7 @@ using namespace std;
 
 CGame::CGame(const std::string & fileName, size_t numPlayer)
 {
+    // initialize map part
     fstream inf(fileName, std::ios::in);
     string input;
     while( getline(inf, input) ) {
@@ -59,4 +60,14 @@ CGame::CGame(const std::string & fileName, size_t numPlayer)
             cout << "Unknown Case!!" << endl;
         }
     }
+
+    // initialize player part
+    string playerName, default_name[4] = {"AllenYang", "HEDE0724", "CarolChen", "YuShan"};
+    for(size_t i=0; i<numPlayer; i+=1) {
+        cout << "\nPlease input player " << i+1 << "'s name (Default: " << default_name[i] << " ";
+        getline(cin, playerName);
+        if(playerName == "") playerName = default_name[i];
+        worldplayer.AddPlayer(i, playerName);
+    }
+
 }
