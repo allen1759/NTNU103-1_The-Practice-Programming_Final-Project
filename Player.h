@@ -3,22 +3,22 @@
 
 #include <string>
 
-
-
 class CPlayer
 {
 public:
     CPlayer () = default;
     CPlayer (size_t id,std::string name) :id_(id),name_(name) {}
-    void AddPlayer(size_t id,std::string name0);
     void PrintPlayer();
     void Move(size_t dice);
-    int ModifyMoney(int m);
-    void AddUnit(); //call this in game
+    bool ModifyMoney(int m);
+    // if dead return false
+    void AddUnit();
     void AddCollUnit();
     void Continue();
     void Stop();
-    bool GetDead() { return dead_; }
+
+    bool isDead()const { return dead_; }
+    bool isStop()const { return stop_; }
 
     size_t coll_unit_() const {
         return num_coll_unit_;

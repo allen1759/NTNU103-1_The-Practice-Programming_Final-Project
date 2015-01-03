@@ -19,6 +19,8 @@ public:
 
     virtual void display() const;
     virtual size_t getFine(const size_t dice) const = 0;
+    virtual bool stopPlayer() const {return false;}
+
 protected:
     std::string name_;
     bool buyable_;

@@ -11,7 +11,7 @@ public:
     virtual size_t getFine(const size_t dice) const override
     {return 0;}
 
-    //void StopPlayer(CPlayer &player)const {player.Frozen();}
+    virtual bool stopPlayer() const override {return true;}
 private:
 };
 

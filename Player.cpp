@@ -4,12 +4,6 @@
 
 using namespace std;
 
-void CPlayer::AddPlayer(const size_t id,string name0)
-{
-    id_ = id;
-    name_ = name0;
-}
-
 void CPlayer::PrintPlayer()
 {
     cout << "[" << id_ << "]" << setw(10) << name_ << "  $" << setw(5) << money_
@@ -22,15 +16,14 @@ void CPlayer::Move(size_t dice)
     location_ = location_ % 10;
 }
 
-int CPlayer::ModifyMoney(int m)
+bool CPlayer::ModifyMoney(int m)
 {
     money_ += m;
     if(money_ < 0)
     {
         dead_ = true;
-        return -1;
     }
-    return money_;
+    return !dead_;
 }
 
 void CPlayer::AddUnit()
