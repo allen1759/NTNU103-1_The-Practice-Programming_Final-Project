@@ -13,9 +13,10 @@ public:
     ~CGame() {}
 
     void startGame();
-    bool stepLoop();
-    void showResult();
+    void stepLoop();
+    void showResult() const;
     // haven't finished
+    void showAllMap() const;
 
 private:
     const size_t MaxLevel = 5;

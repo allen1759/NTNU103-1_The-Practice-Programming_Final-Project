@@ -90,7 +90,7 @@ void CGame::startGame()
     }
 }
 
-bool CGame::stepLoop()
+void CGame::stepLoop()
 {
     dice_ = rand()%6 + 1;
     worldplayer[currentID].Move(dice_);
@@ -123,5 +123,20 @@ bool CGame::stepLoop()
     // ºÊº»¦a \AOA/\AOA/\AOA/
     else if( hostPtr==nullptr && worldmap[newPositoin]->isBuyable()==false) {
         worldplayer[currentID].Stop();
+    }
+}
+
+void CGame::showResult() const
+{
+    //
+}
+
+void CGame::showAllMap() const
+{
+    for(size_t i=0; i<worldmap.size(); i+=1) {
+        worldmap[i]->display();
+        cout << " ";
+        worldmap[ worldmap.size()-1-i ]->display();
+        cout << endl;
     }
 }
