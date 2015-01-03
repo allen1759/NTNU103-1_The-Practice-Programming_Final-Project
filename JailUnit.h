@@ -10,8 +10,9 @@ public:
 
     virtual size_t getFine(const size_t dice) const override
     {return 0;}
-
+    virtual bool isBuyable() const override {return false;}
     virtual bool stopPlayer() const override {return true;}
+
 private:
 };
 

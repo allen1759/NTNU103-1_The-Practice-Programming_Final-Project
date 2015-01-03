@@ -16,6 +16,8 @@ public:
 
     size_t size() const { return units_.size(); }
     void AddMap(CMapUnit *);
+    CMapUnit * & operator [] (size_t ind) {return units_[ind];}
+    //CMapUnit* const & operator [] (size_t ind) const {return units_[ind];}
 
 private:
     //static constexpr size_t MaxNumUnit = 20;

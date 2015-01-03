@@ -11,9 +11,9 @@ public:
     { }
 //類別內容回傳
     //土地金額
-    size_t getPrice() const;
+    virtual size_t getPrice() const override {return price_;}
     //過路費 ( 統一傳 dice )
-    virtual size_t getFine(const size_t dice) const override;
+    virtual size_t getFine(size_t dice) const override;
 
 
 //狀態更動

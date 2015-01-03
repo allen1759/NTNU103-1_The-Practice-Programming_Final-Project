@@ -19,11 +19,6 @@ inline bool CMapUnit::isHostRight(const CPlayer *host)const
     return (host == host_);
 }
 
-inline bool CMapUnit::isBuyable() const
-{
-    return buyable_;
-}
-
 inline bool CMapUnit::isHere(size_t player_id) const
 {
     return who_is_here_[player_id];

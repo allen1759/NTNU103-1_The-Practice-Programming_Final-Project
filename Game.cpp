@@ -1,4 +1,5 @@
 #include "Game.h"
+#include <stdlib.h>
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -70,4 +71,57 @@ CGame::CGame(const std::string & fileName, size_t numPlayer)
         worldplayer.AddPlayer(i, playerName);
     }
 
+    alivePlayer = numPlayer;
+}
+
+void CGame::startGame()
+{
+    // alivePlayer == 0 遊戲結束
+    while( alivePlayer != 0 ) {
+        if( worldplayer[currentID].isDead() );
+        // Dead : do nothing
+        else if( worldplayer[currentID].isStop() )
+            worldplayer[currentID].Continue();
+        // 暫停一輪
+        else
+            stepLoop();
+
+        currentID += 1;
+    }
+}
+
+bool CGame::stepLoop()
+{
+    dice_ = rand()%6 + 1;
+    worldplayer[currentID].Move(dice_);
+    size_t newPositoin = worldplayer[currentID].getLocation();
+
+    CPlayer * hostPtr = worldmap[newPositoin]->getHost();
+    // 別人的土地
+    if( hostPtr != nullptr ) {
+        int fine = worldmap[newPositoin]->getFine(dice_);
+        if( fine > worldplayer[currentID].getMoney() ) {
+            fine = worldplayer[currentID].getMoney();
+            worldplayer[currentID].Dead();
+            alivePlayer -= 1;
+            // should release all the maps
+        }
+        hostPtr->ModifyMoney( fine );
+        worldplayer[currentID].ModifyMoney( 0-fine );
+    }
+    // 可以買的土地
+    else if( worldmap[newPositoin]->isBuyable() ) {
+        cout << " do u want to buy???" << endl;
+        string option;
+        getline(cin, option);
+        if( option[0] != 'n' ) {
+            worldplayer[currentID].ModifyMoney( worldmap[newPositoin]->getPrice() );
+            worldmap[newPositoin]->setHost( &worldplayer[currentID] );
+            worldmap[newPositoin]->setBuyable();
+        }
+    }
+    // 監獄地 \AOA/\AOA/\AOA/
+    else if( hostPtr==nullptr && worldmap[newPositoin]->isBuyable()==false) {
+        worldplayer[currentID].Stop();
+    }
 }

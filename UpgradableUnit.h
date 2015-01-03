@@ -13,7 +13,7 @@ public:
     //土地金額p
     size_t getPrice() const;
     //過路費
-    virtual size_t getFine(const size_t dice) const;
+    virtual size_t getFine(size_t dice) const;
     //升級金額
     size_t getUp_price() const;
 

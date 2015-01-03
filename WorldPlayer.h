@@ -12,10 +12,13 @@ public:
     }
     void AddPlayer(const size_t id,std::string name_);
     void PrintPlayers();
+    CPlayer & operator [] (size_t ind) {return players[ind];}
+    const CPlayer & operator [] (size_t ind) const {return players[ind];}
+
 private:
     size_t num_of_player_ = 0;
     static constexpr size_t max_num_player = 4;
-    CPlayer player[max_num_player];
+    CPlayer players[max_num_player];
 };
 
 #endif // WORLDPLAYER_H_INCLUDED

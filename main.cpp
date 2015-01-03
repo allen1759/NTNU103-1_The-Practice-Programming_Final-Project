@@ -1,4 +1,6 @@
 #include <iostream>
+#include <stdlib.h>
+#include <time.h>
 #include "Player.h"
 #include "MapUnit.h"
 #include "JailUnit.h"
@@ -10,6 +12,7 @@ using namespace std;
 
 int main()
 {
+    srand( time(NULL) );
     // create a new game
 
     size_t num_Players;
@@ -19,10 +22,7 @@ int main()
     else if(num_Players<=0) num_Players = 1;
 
     CGame newGame("map.dat", num_Players);
-
-
-
-
+    newGame.startGame();
 
     return 0;
 }

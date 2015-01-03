@@ -12,17 +12,21 @@ public:
     void Move(size_t dice);
     bool ModifyMoney(int m);
     // if dead return false
+    void Dead() {dead_ = true;}
     void AddUnit();
     void AddCollUnit();
     void Continue();
     void Stop();
 
+    size_t getLocation()const { return location_; }
+    int getMoney()const { return money_; };
     bool isDead()const { return dead_; }
     bool isStop()const { return stop_; }
 
     size_t coll_unit_() const {
         return num_coll_unit_;
     }
+
 private:
     size_t id_ = 0, location_ = 0;
     int money_ = 30000;
