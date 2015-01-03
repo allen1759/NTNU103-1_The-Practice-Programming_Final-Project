@@ -4,17 +4,10 @@
 
 using namespace std;
 
-void CWorldPlayer::AddPlayer()
+void CWorldPlayer::AddPlayer(const size_t id,string name_)
 {
-    cout << "How many players?(Maximum:" << max_num_player << ")";
-    cin >> num_of_player_;
-    if(num_of_player_ > max_num_player ) num_of_player_ = max_num_player;
-
-    for(size_t i=0; i < num_of_player_; i++)
-    {
-        player[num_of_player_].AddPlayer(num_of_player_);
-        num_of_player_++;
-    }
+    player[id].AddPlayer(id,name_);
+    num_of_player_++;
 }
 
 void CWorldPlayer::PrintPlayers()

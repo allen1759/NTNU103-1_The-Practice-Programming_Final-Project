@@ -10,7 +10,7 @@ public:
     {
         return max_num_player;
     }
-    void AddPlayer();
+    void AddPlayer(const size_t id,std::string name_);
     void PrintPlayers();
 private:
     size_t num_of_player_ = 0;

@@ -8,9 +8,9 @@
 class CPlayer
 {
 public:
-    CPlayer () {}
-    CPlayer (size_t id) :id_(id) {}
-    void AddPlayer(size_t id);
+    CPlayer () = default;
+    CPlayer (size_t id,std::string name) :id_(id),name_(name) {}
+    void AddPlayer(size_t id,std::string name0);
     void PrintPlayer();
     void Move(size_t dice);
     int ModifyMoney(int m);

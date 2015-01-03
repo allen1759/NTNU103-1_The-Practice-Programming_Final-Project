@@ -4,17 +4,10 @@
 
 using namespace std;
 
-void CPlayer::AddPlayer(size_t id)
+void CPlayer::AddPlayer(const size_t id,string name0)
 {
-    string d_name_[4] = {"AllenYang", "HEDE0724", "CarolChen", "YuShan"};
-    cout << "\nPlease input player " << id << "'s name (Default: "
-         << d_name_[id] << " ";
-    getline(cin,name_);
-    if(name_ == "")
-    {
-        name_ = d_name_[id];
-    }
     id_ = id;
+    name_ = name0;
 }
 
 void CPlayer::PrintPlayer()
