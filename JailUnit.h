@@ -12,6 +12,7 @@ public:
     {return 0;}
     virtual bool isBuyable() const override {return false;}
     virtual bool stopPlayer() const override {return true;}
+    virtual void display() const override {}
 
 private:
 };

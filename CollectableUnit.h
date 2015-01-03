@@ -9,21 +9,22 @@ public:
     CCollectableUnit(const std::string &name, size_t id,size_t numPlayer,const size_t price)
     :CMapUnit(name,true,id,numPlayer),price_(price)
     { }
-//Ãþ§O¤º®e¦^¶Ç
-    //¤g¦aª÷ÃB
+//ÃƒÃ¾Â§OÂ¤ÂºÂ®eÂ¦^Â¶Ã‡
+    //Â¤gÂ¦aÂªÃ·ÃƒB
     virtual size_t getPrice() const override {return price_;}
-    //¹L¸ô¶O ( ²Î¤@¶Ç dice )
+    //Â¹LÂ¸Ã´Â¶O ( Â²ÃŽÂ¤@Â¶Ã‡ dice )
     virtual size_t getFine(size_t dice) const override;
 
 
-//ª¬ºA§ó°Ê
-    //½æ¥X
+//ÂªÂ¬ÂºAÂ§Ã³Â°ÃŠ
+    //Â½Ã¦Â¥X
     void NewHost(CPlayer *P1);
-    //¥D¤H¯}²£
+    //Â¥DÂ¤HÂ¯}Â²Â£
     void bankrupt();
+    virtual void display() const override {}
 
 private:
-    //           ¦a»ù      »@ª÷
+    //           Â¦aÂ»Ã¹      Â»@ÂªÃ·
     const size_t price_=0, travel_fine_ =0;
 };
 

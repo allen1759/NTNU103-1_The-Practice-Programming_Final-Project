@@ -9,27 +9,28 @@ class CUpgradableUnit: public CMapUnit
 {
 public:
     CUpgradableUnit(const std::string & name, size_t id, size_t numPlayer,size_t price,size_t upgrade,const std::vector<size_t> & f1);
-//Ãþ§O¤º®e¦^¶Ç
-    //¤g¦aª÷ÃBp
+//ÃƒÃ¾Â§OÂ¤ÂºÂ®eÂ¦^Â¶Ã‡
+    //Â¤gÂ¦aÂªÃ·ÃƒBp
     size_t getPrice() const;
-    //¹L¸ô¶O
+    //Â¹LÂ¸Ã´Â¶O
     virtual size_t getFine(size_t dice) const;
-    //¤É¯Åª÷ÃB
+    //Â¤Ã‰Â¯Ã…ÂªÃ·ÃƒB
     size_t getUp_price() const;
 
-//Ãþ§O¤º®e¤ñ¸û
+//ÃƒÃ¾Â§OÂ¤ÂºÂ®eÂ¤Ã±Â¸Ã»
 
-//ª¬ºA§ó°Ê
-    //½æ¥X
+//ÂªÂ¬ÂºAÂ§Ã³Â°ÃŠ
+    //Â½Ã¦Â¥X
     void NewHost(CPlayer *P1);
-    //¥D¤H¯}²£
+    //Â¥DÂ¤HÂ¯}Â²Â£
     void bankrupt();
+    virtual void display() const override {}
 
 private:
-    //           ¦a»ù      ¤É¯Åª÷ÃB
+    //           Â¦aÂ»Ã¹      Â¤Ã‰Â¯Ã…ÂªÃ·ÃƒB
     const size_t price_=0,upgrade_price=0;
     std::vector <size_t> travel_fine_;
-    //     µ¥¯Å
+    //     ÂµÂ¥Â¯Ã…
     size_t level_ = 1;
 };
 

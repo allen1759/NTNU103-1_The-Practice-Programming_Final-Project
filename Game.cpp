@@ -105,6 +105,7 @@ void CGame::stepLoop()
             worldplayer[currentID].Dead();
             alivePlayer -= 1;
             // should release all the maps
+            // hint : bankrupt funct
         }
         hostPtr->ModifyMoney( fine );
         worldplayer[currentID].ModifyMoney( 0-fine );
