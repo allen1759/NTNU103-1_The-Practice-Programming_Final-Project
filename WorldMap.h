@@ -18,6 +18,7 @@ public:
     void AddMap(CMapUnit *);
     CMapUnit * & operator [] (size_t ind) {return units_[ind];}
     CMapUnit* const & operator [] (size_t ind) const {return units_[ind];}
+    void display() const;
 
     // not sure for this const operator []
 

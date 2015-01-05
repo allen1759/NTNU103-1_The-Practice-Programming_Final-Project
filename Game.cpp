@@ -81,9 +81,9 @@ CGame::CGame(const std::string & fileName, size_t numPlayer)
 
 void CGame::startGame()
 {
-    system("cls");
-    // alivePlayer == 0 遊戲結束
-    while( alivePlayer != 0 ) {
+    // alivePlayer == 0 遊戲結束 // = 1?
+    while( alivePlayer != 1 ) {
+        system("cls");
         showEveryThing();
 
         if( worldplayer[currentID].isDead() );
@@ -143,18 +143,9 @@ void CGame::showResult() const
 }
 void CGame::showEveryThing()
 {
-    showAllMap();
+    worldmap.display();
     cout << endl;
     worldplayer.PrintPlayers(currentID);
     cout << endl;
 }
 
-void CGame::showAllMap() const
-{
-    for(size_t i=0; i<worldmap.size(); i+=1) {
-        worldmap[i]->display();
-        cout << "       ";
-        worldmap[ worldmap.size()-1-i ]->display();
-        cout << endl;
-    }
-}
