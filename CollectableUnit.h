@@ -17,8 +17,8 @@ public:
     void bankrupt();
     virtual void display(size_t index) const override {
         CMapUnit::display(index);
-        if(buyable_) printf("B$ %d",price_);
-        else printf("(%d) x%d",host_->getID(),host_->getcoll_unit_());
+        if(buyable_) printf("     B$%5d",price_);
+        else printf(" (%d) x%d",host_->getID(),host_->getcoll_unit_());
     }
 
 private:

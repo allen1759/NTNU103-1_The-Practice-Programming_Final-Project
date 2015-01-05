@@ -45,6 +45,6 @@ void CMapUnit::display(size_t index) const
         else std::cout << " ";
     }
     std::cout << "=  [" << id_ << "]";
-    printf("%10s     ",name_.c_str());
+    printf("%10s",name_.c_str());
 
 }
