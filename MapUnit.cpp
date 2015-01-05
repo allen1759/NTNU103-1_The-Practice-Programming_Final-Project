@@ -37,7 +37,6 @@ inline void CMapUnit::leaveHere(size_t player_id)
 
 void CMapUnit::display() const
 {
-    std::cout << "1" << std::endl;
     std::cout << "=";
     for(size_t i=0; i<who_is_here_.size(); i+=1)
     {
