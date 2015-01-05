@@ -6,6 +6,7 @@
 class CWorldPlayer
 {
 public:
+    CWorldPlayer() {}
     size_t GetMaxNum()
     {
         return max_num_player;

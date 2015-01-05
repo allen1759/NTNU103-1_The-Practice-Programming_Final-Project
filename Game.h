@@ -9,6 +9,7 @@
 class CGame
 {
 public:
+
     CGame(const std::string & fileName, size_t numPlayer);
     ~CGame() {}
 

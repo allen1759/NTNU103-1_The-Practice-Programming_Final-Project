@@ -14,6 +14,7 @@ CGame::CGame(const std::string & fileName, size_t numPlayer)
     if(!inf) return;
 
     string input;
+    size_t currentMap = 0;
     while( getline(inf, input) ) {
         stringstream ss(input);
         char type;
@@ -27,7 +28,7 @@ CGame::CGame(const std::string & fileName, size_t numPlayer)
                 vector<size_t> fine(MaxLevel);
                 ss >> price >> upgr;
                 for( auto &ele : fine ) ss >> ele;
-                CUpgradableUnit * mapPTr = new CUpgradableUnit(mapName, currentID++, numPlayer, price, upgr, fine);
+                CUpgradableUnit * mapPTr = new CUpgradableUnit(mapName, currentMap++, numPlayer, price, upgr, fine);
                 worldmap.AddMap(mapPTr);
             }
             break;
@@ -37,7 +38,7 @@ CGame::CGame(const std::string & fileName, size_t numPlayer)
                 ss >> mapName;
                 size_t price, fine;
                 ss >> price >> fine;
-                CRandomCostUnit * mapPtr = new CRandomCostUnit(mapName, currentID++, numPlayer, price, fine);
+                CRandomCostUnit * mapPtr = new CRandomCostUnit(mapName, currentMap++, numPlayer, price, fine);
                 worldmap.AddMap(mapPtr);
             }
             break;
@@ -47,7 +48,7 @@ CGame::CGame(const std::string & fileName, size_t numPlayer)
                 ss >> mapName;
                 size_t price, fine;
                 ss >> price >> fine;
-                CCollectableUnit * mapPtr = new CCollectableUnit(mapName, currentID++, numPlayer, price);
+                CCollectableUnit * mapPtr = new CCollectableUnit(mapName, currentMap++, numPlayer, price);
                 worldmap.AddMap(mapPtr);
             }
             break;
@@ -55,7 +56,7 @@ CGame::CGame(const std::string & fileName, size_t numPlayer)
         case 'J': {
                 string mapName;
                 ss >> mapName;
-                CJailUnit * mapPtr = new CJailUnit(mapName, currentID++, numPlayer);
+                CJailUnit * mapPtr = new CJailUnit(mapName, currentMap++, numPlayer);
                 worldmap.AddMap(mapPtr);
             }
             break;
@@ -123,7 +124,9 @@ void CGame::stepLoop()
     }
     // 可以買的土地
     else if( worldmap[newPositoin]->isBuyable() ) {
-        cout << " do u want to buy???" << endl;
+        //cout << currentID << endl;
+        cout << worldplayer[currentID].getName();
+        cout <<  ", do you want to buy " << worldmap[newPositoin]->getName()  << "?"<<endl;
         string option;
         getline(cin, option);
         if( option[0] != 'n' ) {

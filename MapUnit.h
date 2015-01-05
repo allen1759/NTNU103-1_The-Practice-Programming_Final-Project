@@ -14,6 +14,7 @@ public:
     CPlayer * const & getHost() const { return host_; }
     bool isHostRight(const CPlayer *host) const;
 
+    std::string getName() const { return name_; }
     bool isHere(size_t player_id) const;
     void arriveHere(size_t player_id);
     void leaveHere(size_t player_id);

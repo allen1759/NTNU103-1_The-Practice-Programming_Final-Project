@@ -18,6 +18,7 @@ public:
     void Continue();
     void Stop();
 
+    std::string getName() const { return name_; }
     size_t getID() const { return id_; }
     size_t getLocation()const { return location_; }
     int getMoney()const { return money_; };
@@ -27,9 +28,9 @@ public:
     size_t getcoll_unit_() const {
         return num_coll_unit_;
     }
-
+    size_t location_ = 0;
 private:
-    size_t id_ = 0, location_ = 0;
+    size_t id_ = 0;
     int money_ = 30000;
     size_t num_unit_ = 0, num_coll_unit_ = 0;
     std::string name_;
