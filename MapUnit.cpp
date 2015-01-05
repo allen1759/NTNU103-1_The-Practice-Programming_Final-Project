@@ -1,4 +1,5 @@
 #include "MapUnit.h"
+#include <stdio.h>
 #include <iostream>
 
 CMapUnit::CMapUnit (std::string name, bool buy, size_t id,size_t numPlayer)
@@ -24,7 +25,7 @@ inline bool CMapUnit::isHere(size_t player_id) const
     return who_is_here_[player_id];
 }
 
-inline void CMapUnit::arriveHere(size_t player_id)
+void CMapUnit::arriveHere(size_t player_id)
 {
     who_is_here_[player_id] = true;
 }
@@ -35,7 +36,7 @@ inline void CMapUnit::leaveHere(size_t player_id)
 }
 
 
-void CMapUnit::display() const
+void CMapUnit::display(size_t index) const
 {
     std::cout << "=";
     for(size_t i=0; i<who_is_here_.size(); i+=1)
@@ -44,4 +45,6 @@ void CMapUnit::display() const
         else std::cout << " ";
     }
     std::cout << "=  [" << id_ << "]";
+    printf("%10s     ",name_.c_str());
+
 }

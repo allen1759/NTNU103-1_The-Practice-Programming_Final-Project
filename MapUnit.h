@@ -20,7 +20,7 @@ public:
     void setHost(CPlayer * playerPtr) {host_ = playerPtr;}
     void setBuyable() { buyable_ = !buyable_; }
 
-    virtual void display() const;
+    virtual void display(size_t index) const;
     virtual bool isBuyable() const {return true;}
     virtual size_t getFine (size_t dice) const = 0;
     virtual size_t getPrice() const {return 0;}

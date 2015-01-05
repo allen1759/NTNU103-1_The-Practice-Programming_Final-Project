@@ -18,6 +18,7 @@ public:
     void Continue();
     void Stop();
 
+    size_t getID() const { return id_; }
     size_t getLocation()const { return location_; }
     int getMoney()const { return money_; };
     bool isDead()const { return dead_; }

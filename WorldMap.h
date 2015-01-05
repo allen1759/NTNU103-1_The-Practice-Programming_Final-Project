@@ -15,6 +15,7 @@ public:
     ~CWorldMap() {}
 
     size_t size() const { return units_.size(); }
+    void GoTo_StartPoint(size_t num);
     void AddMap(CMapUnit *);
     CMapUnit * & operator [] (size_t ind) {return units_[ind];}
     CMapUnit* const & operator [] (size_t ind) const {return units_[ind];}

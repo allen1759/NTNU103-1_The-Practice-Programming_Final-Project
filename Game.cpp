@@ -75,6 +75,8 @@ CGame::CGame(const std::string & fileName, size_t numPlayer)
         getline(cin, playerName);
         if(playerName == "") playerName = default_name[i];
         worldplayer.AddPlayer(i, playerName);
+
+        worldmap.GoTo_StartPoint(i);
     }
     alivePlayer = numPlayer;
 }
@@ -91,11 +93,10 @@ void CGame::startGame()
         else if( worldplayer[currentID].isStop() )
             worldplayer[currentID].Continue();
         // ¼È°±¤@½ü
-        else
+        else {
             stepLoop();
-
+        }
         currentID += 1;
-
         currentID %= worldplayer.size();
     }
 }

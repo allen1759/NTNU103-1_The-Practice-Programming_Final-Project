@@ -9,24 +9,20 @@ class CRandomCostUnit: public CMapUnit
 public:
     CRandomCostUnit(const std::string &name, size_t id, size_t numPlayer,size_t price,size_t fine)
         :CMapUnit(name,true,id,numPlayer),price_(price),travel_fine_(fine) { }
-//Ãþ§O¤º®e¦^¶Ç
-    //¤g¦aª÷ÃB
+
     size_t getPrice() const;
-    //¹L¸ô¶O
+
     virtual size_t getFine(size_t dice) const;
 
-//Ãþ§O¤º®e¤ñ¸û
-
-//ª¬ºA§ó°Ê
-    //½æ¥X
     void NewHost(CPlayer *P1);
-    //¥D¤H¯}²£
     void bankrupt();
-    virtual void display() const override {}
+    virtual void display(size_t index) const override {
+        CMapUnit::display(index);
+    }
 
 private:
-    size_t price_= 0;         //¦a»ù
-    size_t travel_fine_ = 0;  //»@ª÷
+    size_t price_= 0;
+    size_t travel_fine_ = 0;
 };
 
 #endif // RANDOMCOSTUNIT_H_INCLUDED
