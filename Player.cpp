@@ -6,7 +6,7 @@ using namespace std;
 
 void CPlayer::PrintPlayer()
 {
-    cout << "[" << id_ << "]" << setw(10) << name_ << "  $" << setw(5) << money_
+    cout << "[" << id_ << "]" << setw(15) << name_ << "  $" << setw(5) << money_
          << " with " << num_unit_ << " units \n" ;
 }
 

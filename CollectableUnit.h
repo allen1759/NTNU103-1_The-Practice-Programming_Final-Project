@@ -1,6 +1,7 @@
 #ifndef COLLECTABLEUNIT_H_INCLUDED
 #define COLLECTABLEUNIT_H_INCLUDED
 
+#include <stdio.h>
 #include "MapUnit.h"
 
 class CCollectableUnit: public CMapUnit
@@ -16,6 +17,8 @@ public:
     void bankrupt();
     virtual void display(size_t index) const override {
         CMapUnit::display(index);
+        if(buyable_) printf("B$ %d",price_);
+        else printf("(%d) x%d",host_->getID(),host_->getcoll_unit_());
     }
 
 private:

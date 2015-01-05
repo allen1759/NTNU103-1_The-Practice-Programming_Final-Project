@@ -24,7 +24,7 @@ public:
     bool isDead()const { return dead_; }
     bool isStop()const { return stop_; }
 
-    size_t coll_unit_() const {
+    size_t getcoll_unit_() const {
         return num_coll_unit_;
     }
 

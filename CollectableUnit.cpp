@@ -9,7 +9,7 @@
     //過路費
 size_t CCollectableUnit::getFine(const size_t dice) const
 {
-    return host_->coll_unit_() * travel_fine_;
+    return host_->getcoll_unit_() * travel_fine_;
 }
 
 //類別內容比較

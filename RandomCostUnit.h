@@ -1,6 +1,7 @@
 #ifndef RANDOMCOSTUNIT_H_INCLUDED
 #define RANDOMCOSTUNIT_H_INCLUDED
 
+#include <stdio.h>
 #include "MapUnit.h"
 #include "Player.h"
 
@@ -18,6 +19,7 @@ public:
     void bankrupt();
     virtual void display(size_t index) const override {
         CMapUnit::display(index);
+        if(buyable_) printf("B$ %d",price_);
     }
 
 private:
