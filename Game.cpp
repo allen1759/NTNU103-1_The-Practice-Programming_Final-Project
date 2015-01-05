@@ -126,7 +126,9 @@ void CGame::stepLoop()
     else if( worldmap[newPositoin]->isBuyable() ) {
         //cout << currentID << endl;
         cout << worldplayer[currentID].getName();
-        cout <<  ", do you want to buy " << worldmap[newPositoin]->getName()  << "?"<<endl;
+        cout <<  ", do you want to buy " << worldmap[newPositoin]->getName()  << "? ";
+        cout << "(1: Yes [default] / 2: No)";
+
         string option;
         getline(cin, option);
         if( option[0] != 'n' ) {
