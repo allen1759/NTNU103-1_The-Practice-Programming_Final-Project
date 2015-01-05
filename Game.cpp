@@ -71,7 +71,7 @@ CGame::CGame(const std::string & fileName, size_t numPlayer)
     // initialize player part
     string playerName, default_name[4] = {"AllenYang", "HEDE0724", "CarolChen", "YuShan"};
     for(size_t i=0; i<numPlayer; i+=1) {
-        cout << "\nPlease input player " << i+1 << "'s name (Default: " << default_name[i] << " )...>";
+        cout << "Please input player " << i+1 << "'s name (Default: " << default_name[i] << " )...>";
         getline(cin, playerName);
         if(playerName == "") playerName = default_name[i];
         worldplayer.AddPlayer(i, playerName);
@@ -81,8 +81,11 @@ CGame::CGame(const std::string & fileName, size_t numPlayer)
 
 void CGame::startGame()
 {
+    system("cls");
     // alivePlayer == 0 ¹CÀ¸µ²§ô
     while( alivePlayer != 0 ) {
+        showEveryThing();
+
         if( worldplayer[currentID].isDead() );
         // Dead : do nothing
         else if( worldplayer[currentID].isStop() )
@@ -92,6 +95,8 @@ void CGame::startGame()
             stepLoop();
 
         currentID += 1;
+
+        currentID %= worldplayer.size();
     }
 }
 
@@ -136,12 +141,19 @@ void CGame::showResult() const
 {
     //
 }
+void CGame::showEveryThing()
+{
+    showAllMap();
+    cout << endl;
+    worldplayer.PrintPlayers(currentID);
+    cout << endl;
+}
 
 void CGame::showAllMap() const
 {
     for(size_t i=0; i<worldmap.size(); i+=1) {
         worldmap[i]->display();
-        cout << " ";
+        cout << "       ";
         worldmap[ worldmap.size()-1-i ]->display();
         cout << endl;
     }
