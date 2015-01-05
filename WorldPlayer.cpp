@@ -6,7 +6,8 @@ using namespace std;
 
 void CWorldPlayer::AddPlayer(const size_t id,string name_)
 {
-    players[id] = CPlayer(id, name_);
+    CPlayer tmp(id,name_);
+    players[id] = tmp;
     num_of_player_++;
 }
 

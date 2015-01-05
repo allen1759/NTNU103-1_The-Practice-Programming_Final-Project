@@ -22,6 +22,7 @@ int main()
     else if(num_Players<=0) num_Players = 1;
 
     CGame newGame("map.dat", num_Players);
+    //要考慮開檔失敗嗎?
     newGame.startGame();
 
     return 0;
