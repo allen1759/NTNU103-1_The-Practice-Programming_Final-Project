@@ -19,9 +19,9 @@ public:
     bool isBuyable() const {return buyable_;}
     void arriveHere(size_t player_id);
     void leaveHere(size_t player_id);
-    void setHost(CPlayer * playerPtr) { host_ = playerPtr; }
     void setBuyable() { buyable_ = !buyable_; }
 
+    virtual void setHost(CPlayer * playerPtr) { host_ = playerPtr; }
     virtual bool isCollectable() const {return false;}
     virtual bool isUpgradable() const {return false;}
     virtual bool stopPlayer() const {return false;}

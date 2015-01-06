@@ -11,6 +11,7 @@ public:
         : CMapUnit(name, true, id, numPlayer), price_(price)
     { }
 
+    virtual void setHost(CPlayer * playerPtr) override;
     virtual bool isCollectable() const override {return true;}
     virtual size_t getPrice() const override;
     virtual size_t getFine (size_t dice) const override;

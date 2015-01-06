@@ -3,6 +3,12 @@
 #include <iomanip>
 using namespace std;
 
+void CCollectableUnit::setHost(CPlayer * playerPtr)
+{
+    host_ = playerPtr;
+    host_ -> AddCollUnit();
+}
+
 size_t CCollectableUnit::getPrice() const
 {
     return price_;
@@ -15,6 +21,6 @@ size_t CCollectableUnit::getFine(size_t dice) const
 void CCollectableUnit::display(size_t index) const
 {
     CMapUnit::display(index);
-    if(buyable_) cout << "     B$" << setw(5) << price_;
+    if(buyable_) cout << "     B$" << setw(5) << price_ <<"   ";
     else cout << " (" << host_->getID() << ") x" << host_->getcoll_unit_();
 }

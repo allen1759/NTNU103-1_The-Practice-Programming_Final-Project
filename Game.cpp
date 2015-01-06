@@ -90,11 +90,16 @@ void CGame::startGame()
 
         if( worldplayer[currentPlayer].isDead() );
         // Dead : do nothing
-        else if( worldplayer[currentPlayer].isStop() )
+        else if( worldplayer[currentPlayer].isStop() ){
             worldplayer[currentPlayer].Continue();
+            cout << worldplayer[currentPlayer].getName() << ", you can't move" << endl;
+        }
         // 暫停一輪
         else {
-            stepLoop();
+            cout << worldplayer[currentPlayer].getName() << ", your turn! GOGOGO? (1: Yes [default] / 2: No)";
+            string option;
+            getline(cin, option);
+            if(option[0] !='2') stepLoop();
         }
         currentPlayer += 1;
         currentPlayer %= worldplayer.size();
@@ -129,7 +134,7 @@ void CGame::stepLoop()
         string option;
         getline(cin, option);
         if( option[0] != 'n' && option[0] != 'N' ) {
-            worldplayer[currentPlayer].ModifyMoney( worldmap[newPositoin]->getPrice() );
+            worldplayer[currentPlayer].ModifyMoney( 0-worldmap[newPositoin]->getPrice() );
             worldmap[newPositoin]->setHost( &worldplayer[currentPlayer] );
             worldmap[newPositoin]->setBuyable();
             worldplayer[currentPlayer].AddUnit();
@@ -163,6 +168,7 @@ void CGame::stepLoop()
     // 別人的土地 (should pay some money)
     else if( hostPtr != nullptr && hostPtr != &worldplayer[currentPlayer] ) {
         int fine = worldmap[newPositoin]->getFine(dice_);
+        //會破產
         if( fine > worldplayer[currentPlayer].getMoney() ) {
             fine = worldplayer[currentPlayer].getMoney();
             worldplayer[currentPlayer].Dead();
@@ -176,6 +182,9 @@ void CGame::stepLoop()
         }
         hostPtr->ModifyMoney( fine );
         worldplayer[currentPlayer].ModifyMoney( 0-fine );
+        cout << worldplayer[currentPlayer].getName() <<", you must pay $"
+             << fine << " to Player " << hostPtr->getID()
+             << " (" << hostPtr->getName() << ")" << endl;
     }
 
 

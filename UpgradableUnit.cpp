@@ -34,9 +34,9 @@ size_t CUpgradableUnit::getUpgradeMoney() const
 void CUpgradableUnit::display(size_t index) const
 {
     CMapUnit::display(index);
-    if(buyable_) cout << "     B$" << setw(5) << price_;
+    if(buyable_) cout << "     B$" << setw(5) << price_ << "   ";
     else cout << " (" << host_->getID() << ") U$"
-              << setw(5) << upgrade_price;
+              << setw(5) << upgrade_price << " L" << level_;
 }
 
 void CUpgradableUnit::upgrade()
