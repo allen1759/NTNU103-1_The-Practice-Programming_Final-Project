@@ -12,7 +12,7 @@ public:
         return max_num_player;
     }
     void AddPlayer(const size_t id,std::string name_);
-    void PrintPlayers(size_t current_id);
+    void PrintPlayers(size_t current_id) const;
     CPlayer & operator [] (size_t ind) {return players[ind];}
     const CPlayer & operator [] (size_t ind) const {return players[ind];}
     size_t size() const { return num_of_player_;}

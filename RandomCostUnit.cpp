@@ -1,27 +1,21 @@
 #include "RandomCostUnit.h"
+#include <iostream>
+#include <iomanip>
+using namespace std;
 
-//類別內容回傳
-    //土地金額
 size_t CRandomCostUnit::getPrice() const
 {
     return price_;
 }
-    //過路費(需傳入點數)
-size_t CRandomCostUnit::getFine(const size_t dice) const
+
+size_t CRandomCostUnit::getFine(size_t dice) const
 {
     return dice * ( travel_fine_ );
 }
 
-//類別內容比較
-//狀態更動
-    //賣出
-//void CRandomCostUnit::NewHost(CPlayer *P1)
-//{
-//    host_ = P1;
-//    buyable_ = false;
-//    return;
-//}
-    //主人破產
-
-
-
+void CRandomCostUnit::display(size_t index) const
+{
+    CMapUnit::display(index);
+    if(buyable_) cout << "     B$" << setw(5) << price_;
+    else cout << " (" << host_->getID() << ") ?";
+}

@@ -1,6 +1,6 @@
 #include "MapUnit.h"
-#include <stdio.h>
 #include <iostream>
+#include <iomanip>
 
 CMapUnit::CMapUnit (std::string name, bool buy, size_t id,size_t numPlayer)
 :name_(name),buyable_(buy),id_(id)
@@ -10,15 +10,10 @@ CMapUnit::CMapUnit (std::string name, bool buy, size_t id,size_t numPlayer)
     }
 }
 
-bool CMapUnit::isHostRight(const CPlayer *host)const
-{
-    return (host == host_);
-}
-
-bool CMapUnit::isHere(size_t player_id) const
-{
-    return who_is_here_[player_id];
-}
+//bool CMapUnit::isMyMap(const CPlayer *host)const
+//{
+//    return (host == host_);
+//}
 
 void CMapUnit::arriveHere(size_t player_id)
 {
@@ -38,7 +33,7 @@ void CMapUnit::display(size_t index) const
         if(who_is_here_[i]) std::cout << i;
         else std::cout << " ";
     }
-    std::cout << "=  [" << id_ << "]";
-    printf("%10s",name_.c_str());
+    std::cout << "=  [" << std::setw(2) << id_ << "]";
+    std::cout << std::setw(10) << name_;
 
 }

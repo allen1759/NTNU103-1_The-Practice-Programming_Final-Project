@@ -88,53 +88,60 @@ void CGame::startGame()
         system("cls");
         showEveryThing();
 
-        if( worldplayer[currentID].isDead() );
+        if( worldplayer[currentPlayer].isDead() );
         // Dead : do nothing
-        else if( worldplayer[currentID].isStop() )
-            worldplayer[currentID].Continue();
+        else if( worldplayer[currentPlayer].isStop() )
+            worldplayer[currentPlayer].Continue();
         // 暫停一輪
         else {
             stepLoop();
         }
-        currentID += 1;
-        currentID %= worldplayer.size();
+        currentPlayer += 1;
+        currentPlayer %= worldplayer.size();
+        while( worldplayer[currentPlayer].isDead() ) {
+            currentPlayer += 1;
+            currentPlayer %= worldplayer.size();
+        }
     }
 }
 
 void CGame::stepLoop()
 {
     //離開本來的位置
-    size_t oldPosition = worldplayer[currentID].getLocation();
-    worldmap[oldPosition]->leaveHere(currentID);
+    size_t oldPosition = worldplayer[currentPlayer].getLocation();
+    worldmap[oldPosition]->leaveHere(currentPlayer);
 
     dice_ = rand()%6 + 1;
-    worldplayer[currentID].Move(dice_);
-    size_t newPositoin = worldplayer[currentID].getLocation();
-    worldmap[newPositoin]->arriveHere(currentID);
+    worldplayer[currentPlayer].Move(dice_, worldmap.size());
+    size_t newPositoin = worldplayer[currentPlayer].getLocation();
+    worldmap[newPositoin]->arriveHere(currentPlayer);
 
     // the host of the Map where you are
     CPlayer * hostPtr = worldmap[newPositoin]->getHost();
 
-    // 別人的土地 (should pay some money)
-    if( hostPtr != nullptr && hostPtr != &worldplayer[currentID] ) {
-        int fine = worldmap[newPositoin]->getFine(dice_);
-        if( fine > worldplayer[currentID].getMoney() ) {
-            fine = worldplayer[currentID].getMoney();
-            worldplayer[currentID].Dead();
-            alivePlayer -= 1;
-            // should release all the maps which is hosted by currentID
-            for(size_t i=0; i<worldmap.size(); i+=1) {
-                if( worldmap[i]->getHost() == &worldplayer[currentID] ) {
-                    worldmap[i]->releaseMap();
-                }
-            }
+    // 沒有主人 可以買的土地
+    if( worldmap[newPositoin]->isBuyable() ) {
+        //cout << currentPlayer << endl;
+        cout << worldplayer[currentPlayer].getName();
+        cout <<  ", do you want to buy " << worldmap[newPositoin]->getName()  << "? ";
+        cout << "(1: Yes [default] / 2: No)";
+
+        string option;
+        getline(cin, option);
+        if( option[0] != 'n' && option[0] != 'N' ) {
+            worldplayer[currentPlayer].ModifyMoney( worldmap[newPositoin]->getPrice() );
+            worldmap[newPositoin]->setHost( &worldplayer[currentPlayer] );
+            worldmap[newPositoin]->setBuyable();
+            worldplayer[currentPlayer].AddUnit();
+            if( worldmap[newPositoin]->isCollectable() )
+                worldplayer[currentPlayer].AddCollUnit();
+            cout << "You pay $" << worldmap[newPositoin]->getPrice()
+                 << " to buy " << worldmap[newPositoin]->getName() << endl ;
         }
-        hostPtr->ModifyMoney( fine );
-        worldplayer[currentID].ModifyMoney( 0-fine );
     }
 
     // 自己的土地 (you can upgrade your map)
-    else if( hostPtr == &worldplayer[currentID] ) {
+    else if( hostPtr == &worldplayer[currentPlayer] ) {
         if( !worldmap[newPositoin]->isUpgradable() ) return;
 
         // upgrade your house
@@ -144,49 +151,45 @@ void CGame::stepLoop()
         string option;
         getline(cin, option);
         if( option[0] != 'n' && option[0] != 'N' ) {
-            if( worldplayer[currentID].getMoney() < upgradeMoney) {
+            if( worldplayer[currentPlayer].getMoney() < upgradeMoney) {
                 cout << "Sorry, you don't have enough money!  Q___Q" << endl;
                 return;
             }
-            worldplayer[currentID].ModifyMoney( 0-upgradeMoney );
+            worldplayer[currentPlayer].ModifyMoney( 0-upgradeMoney );
             worldmap[newPositoin]->upgrade();
         }
     }
 
-    // 沒有主人 可以買的土地
-    else if( hostPtr==nullptr && worldmap[newPositoin]->isBuyable() ) {
-        //cout << currentID << endl;
-        cout << worldplayer[currentID].getName();
-        cout <<  ", do you want to buy " << worldmap[newPositoin]->getName()  << "? ";
-        cout << "(1: Yes [default] / 2: No)";
-
-        string option;
-        getline(cin, option);
-        if( option[0] != 'n' && option[0] != 'N' ) {
-            worldplayer[currentID].ModifyMoney( worldmap[newPositoin]->getPrice() );
-            worldmap[newPositoin]->setHost( &worldplayer[currentID] );
-            worldmap[newPositoin]->setBuyable();
-            worldplayer[currentID].AddUnit();
-            cout << "You pay $" << worldmap[newPositoin]->getPrice()
-                 << " to buy " << worldmap[newPositoin]->getName() << endl ;
+    // 別人的土地 (should pay some money)
+    else if( hostPtr != nullptr && hostPtr != &worldplayer[currentPlayer] ) {
+        int fine = worldmap[newPositoin]->getFine(dice_);
+        if( fine > worldplayer[currentPlayer].getMoney() ) {
+            fine = worldplayer[currentPlayer].getMoney();
+            worldplayer[currentPlayer].Dead();
+            alivePlayer -= 1;
+            // should release all the maps which is hosted by currentPlayer
+            for(size_t i=0; i<worldmap.size(); i+=1) {
+                if( worldmap[i]->getHost() == &worldplayer[currentPlayer] ) {
+                    worldmap[i]->releaseMap();
+                }
+            }
         }
+        hostPtr->ModifyMoney( fine );
+        worldplayer[currentPlayer].ModifyMoney( 0-fine );
     }
+
 
     // 監獄地 \AOA/\AOA/\AOA/
-    else if( hostPtr==nullptr && worldmap[newPositoin]->isBuyable()==false) {
-        worldplayer[currentID].Stop();
+    else if( hostPtr==nullptr ) {
+        worldplayer[currentPlayer].Stop();
     }
 }
 
-void CGame::showResult() const
-{
-    //
-}
-void CGame::showEveryThing()
+void CGame::showEveryThing() const
 {
     worldmap.display();
     cout << endl;
-    worldplayer.PrintPlayers(currentID);
+    worldplayer.PrintPlayers(currentPlayer);
     cout << endl;
 }
 

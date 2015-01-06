@@ -8,8 +8,8 @@ class CPlayer
 public:
     CPlayer () = default;
     CPlayer (size_t id,std::string name) :id_(id),name_(name) {}
-    void PrintPlayer();
-    void Move(size_t dice);
+    void PrintPlayer() const;
+    void Move(size_t dice, size_t numOfMapUnit);
     bool ModifyMoney(int m);
     // if dead return false
     void Dead() {dead_ = true;}

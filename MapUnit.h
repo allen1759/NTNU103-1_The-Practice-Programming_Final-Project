@@ -14,21 +14,22 @@ public:
     inline CPlayer * const & getHost() const { return host_; }
     inline const std::string & getName() const { return name_; }
 
-    bool isHostRight(const CPlayer *host) const;
-    bool isHere(size_t player_id) const;
+    //bool isMyMap(const CPlayer *host) const;
+    //bool isHere(size_t player_id) const;
+    bool isBuyable() const {return buyable_;}
     void arriveHere(size_t player_id);
     void leaveHere(size_t player_id);
     void setHost(CPlayer * playerPtr) { host_ = playerPtr; }
     void setBuyable() { buyable_ = !buyable_; }
 
-    virtual void display(size_t index) const;
-    virtual bool isBuyable() const {return true;}
+    virtual bool isCollectable() const {return false;}
     virtual bool isUpgradable() const {return false;}
-    virtual size_t getFine (size_t dice) const = 0;
+    virtual bool stopPlayer() const {return false;}
     virtual size_t getPrice() const {return 0;}
+    virtual size_t getFine (size_t dice) const {return 0;}
     virtual size_t getUpgradeMoney() const {return 0;}
 
-    virtual bool stopPlayer() const {return false;}
+    virtual void display(size_t index) const;
     virtual void upgrade() {}
     virtual void releaseMap()
     {

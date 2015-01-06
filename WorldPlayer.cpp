@@ -11,7 +11,7 @@ void CWorldPlayer::AddPlayer(const size_t id,string name_)
     num_of_player_++;
 }
 
-void CWorldPlayer::PrintPlayers(size_t current_id)
+void CWorldPlayer::PrintPlayers(size_t current_id) const
 {
     for(size_t i=0; i<num_of_player_; i++)
     {

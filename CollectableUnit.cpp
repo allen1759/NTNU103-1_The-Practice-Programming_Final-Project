@@ -1,25 +1,20 @@
 #include "CollectableUnit.h"
+#include <iostream>
+#include <iomanip>
+using namespace std;
 
-//類別內容回傳
-    //土地金額
-//size_t CCollectableUnit::getPrice() const
-//{
-//    return price_;
-//}
-    //過路費
-size_t CCollectableUnit::getFine(const size_t dice) const
+size_t CCollectableUnit::getPrice() const
+{
+    return price_;
+}
+size_t CCollectableUnit::getFine(size_t dice) const
 {
     return host_->getcoll_unit_() * travel_fine_;
 }
 
-//類別內容比較
-
-//狀態更動
-    //賣出
-//void CCollectableUnit::NewHost(CPlayer *P1)
-//{
-//    host_ = P1;
-//    buyable_ = false;
-//}
-
-
+void CCollectableUnit::display(size_t index) const
+{
+    CMapUnit::display(index);
+    if(buyable_) cout << "     B$" << setw(5) << price_;
+    else cout << " (" << host_->getID() << ") x" << host_->getcoll_unit_();
+}

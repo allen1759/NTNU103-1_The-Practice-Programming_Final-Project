@@ -15,14 +15,12 @@ public:
 
     void startGame();
     void stepLoop();
-    void showResult() const;
-    // haven't finished
-    void showEveryThing();
+    void showEveryThing() const;
 
 private:
     const size_t MaxLevel = 5;
     size_t dice_;
-    size_t currentID = 0;
+    size_t currentPlayer = 0;
     size_t alivePlayer;
     CWorldMap worldmap;
     CWorldPlayer worldplayer;

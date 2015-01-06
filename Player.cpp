@@ -4,16 +4,16 @@
 
 using namespace std;
 
-void CPlayer::PrintPlayer()
+void CPlayer::PrintPlayer() const
 {
     cout << "[" << id_ << "]" << setw(15) << name_ << "  $" << setw(5) << money_
          << " with " << num_unit_ << " units \n" ;
 }
 
-void CPlayer::Move(size_t dice)
+void CPlayer::Move(size_t dice, size_t numOfMapUnit)
 {
     location_ += dice;
-    location_ = location_ % 10;
+    location_ = location_ % numOfMapUnit;
 }
 
 bool CPlayer::ModifyMoney(int m)
