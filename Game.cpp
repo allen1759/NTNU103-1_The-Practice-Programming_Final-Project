@@ -10,61 +10,10 @@ CGame::CGame(const std::string & fileName, size_t numPlayer)
 {
     // initialize map part
     fstream inf(fileName, std::ios::in);
-
     if(!inf) return;
-
     string input;
     size_t currentMap = 0;
-    while( getline(inf, input) ) {
-        stringstream ss(input);
-        char type;
-        ss >> type;
-        switch (type)
-        {
-        case 'U': {
-                string mapName;
-                ss >> mapName;
-                size_t price, upgr;
-                vector<size_t> fine(MaxLevel);
-                ss >> price >> upgr;
-                for( auto &ele : fine ) ss >> ele;
-                CUpgradableUnit * mapPTr = new CUpgradableUnit(mapName, currentMap++, numPlayer, price, upgr, fine);
-                worldmap.AddMap(mapPTr);
-            }
-            break;
-
-        case 'R': {
-                string mapName;
-                ss >> mapName;
-                size_t price, fine;
-                ss >> price >> fine;
-                CRandomCostUnit * mapPtr = new CRandomCostUnit(mapName, currentMap++, numPlayer, price, fine);
-                worldmap.AddMap(mapPtr);
-            }
-            break;
-
-        case 'C': {
-                string mapName;
-                ss >> mapName;
-                size_t price, fine;
-                ss >> price >> fine;
-                CCollectableUnit * mapPtr = new CCollectableUnit(mapName, currentMap++, numPlayer, price);
-                worldmap.AddMap(mapPtr);
-            }
-            break;
-
-        case 'J': {
-                string mapName;
-                ss >> mapName;
-                CJailUnit * mapPtr = new CJailUnit(mapName, currentMap++, numPlayer);
-                worldmap.AddMap(mapPtr);
-            }
-            break;
-
-        default:
-            cout << "Unknown Case!!" << endl;
-        }
-    }
+    while( getline(inf, input) ) SwichMap(input, numPlayer, currentMap++);
     inf.close();
 
     // initialize player part
@@ -74,14 +23,69 @@ CGame::CGame(const std::string & fileName, size_t numPlayer)
         getline(cin, playerName);
         if(playerName == "") playerName = default_name[i];
         worldplayer.AddPlayer(i, playerName);
-
         worldmap.GoTo_StartPoint(i);
     }
     alivePlayer = numPlayer;
 }
 
+void CGame::SwichMap(const string & input, size_t numPlayer, size_t currentMap)
+{
+    stringstream ss(input);
+    char type;
+    ss >> type;
+    switch (type)
+    {
+    case 'U': {
+            string mapName;
+            ss >> mapName;
+            size_t price, upgr;
+            vector<size_t> fine(MaxLevel);
+            ss >> price >> upgr;
+            for( auto &ele : fine ) ss >> ele;
+            CUpgradableUnit * mapPTr = new CUpgradableUnit(mapName, currentMap, numPlayer, price, upgr, fine);
+            worldmap.AddMap(mapPTr);
+        }
+        break;
+
+    case 'R': {
+            string mapName;
+            ss >> mapName;
+            size_t price, fine;
+            ss >> price >> fine;
+            CRandomCostUnit * mapPtr = new CRandomCostUnit(mapName, currentMap, numPlayer, price, fine);
+            worldmap.AddMap(mapPtr);
+        }
+        break;
+
+    case 'C': {
+            string mapName;
+            ss >> mapName;
+            size_t price, fine;
+            ss >> price >> fine;
+            CCollectableUnit * mapPtr = new CCollectableUnit(mapName, currentMap, numPlayer, price, fine);
+            worldmap.AddMap(mapPtr);
+        }
+        break;
+
+    case 'J': {
+            string mapName;
+            ss >> mapName;
+            CJailUnit * mapPtr = new CJailUnit(mapName, currentMap, numPlayer);
+            worldmap.AddMap(mapPtr);
+        }
+        break;
+
+    default:
+        cout << "Unknown Case!!" << endl;
+    }
+}
+
 void CGame::startGame()
 {
+    if(worldmap.size() == 0) {
+        cout << "Start game failed, check that there is a \"map.dat\" file at the right place." << endl;
+        return;
+    }
     // alivePlayer == 1 遊戲結束
     while( alivePlayer != 1 ) {
         system("pause");
@@ -89,18 +93,19 @@ void CGame::startGame()
         showEveryThing();
 
         if( worldplayer[currentPlayer].isDead() );
-        // Dead : do nothing
+        // Dead : do nothing, ignore this step
         else if( worldplayer[currentPlayer].isStop() ){
             worldplayer[currentPlayer].Continue();
             cout << worldplayer[currentPlayer].getName() << ", you can't move" << endl;
         }
-        // 暫停一輪
+        // pause one time
         else {
             cout << worldplayer[currentPlayer].getName() << ", your turn! GOGOGO? (1: Yes [default] / 2: No)";
             string option;
             getline(cin, option);
-            if(option[0] !='2') stepLoop();
+            if(option[0] != '2') stepLoop();
         }
+        // move to next "alive" player
         currentPlayer += 1;
         currentPlayer %= worldplayer.size();
         while( worldplayer[currentPlayer].isDead() ) {
@@ -117,7 +122,11 @@ void CGame::stepLoop()
     worldmap[oldPosition]->leaveHere(currentPlayer);
 
     dice_ = rand()%6 + 1;
-    worldplayer[currentPlayer].Move(dice_, worldmap.size());
+    if( worldplayer[currentPlayer].Move(dice_, worldmap.size()) ) {
+        worldplayer[currentPlayer].EarnMoney( AwardMoney );
+        cout << "Congratulations!!! You can get $" << AwardMoney
+             << " because you travel all over the world!" << endl;
+    }
     size_t newPositoin = worldplayer[currentPlayer].getLocation();
     worldmap[newPositoin]->arriveHere(currentPlayer);
 
@@ -126,7 +135,6 @@ void CGame::stepLoop()
 
     // 沒有主人 可以買的土地
     if( worldmap[newPositoin]->isBuyable() ) {
-        //cout << currentPlayer << endl;
         cout << worldplayer[currentPlayer].getName();
         cout <<  ", do you want to buy " << worldmap[newPositoin]->getName()  << "? ";
         cout << "(1: Yes [default] / 2: No)";
@@ -134,7 +142,12 @@ void CGame::stepLoop()
         string option;
         getline(cin, option);
         if( option[0] != 'n' && option[0] != 'N' ) {
-            worldplayer[currentPlayer].ModifyMoney( 0-worldmap[newPositoin]->getPrice() );
+            if( worldplayer[currentPlayer].getMoney() < worldmap[newPositoin]->getPrice() ) {
+                cout << "Sorry, you don't have enough money!  Q___Q" << endl;
+                return;
+            }
+
+            worldplayer[currentPlayer].PayMoney( worldmap[newPositoin]->getPrice() );
             worldmap[newPositoin]->setHost( &worldplayer[currentPlayer] );
             worldmap[newPositoin]->setBuyable();
             worldplayer[currentPlayer].AddUnit();
@@ -150,18 +163,22 @@ void CGame::stepLoop()
         if( !worldmap[newPositoin]->isUpgradable() ) return;
 
         // upgrade your house
-        int upgradeMoney = worldmap[newPositoin]->getUpgradeMoney();
-        cout << "u can upgrade it, cost " << upgradeMoney << " yes or no?";
+        cout << worldplayer[currentPlayer].getName() << ", do you want to upgrade "
+             << worldmap[newPositoin]->getName() << "? (1: Yes [default] / 2: No)...>";
 
         string option;
         getline(cin, option);
         if( option[0] != 'n' && option[0] != 'N' ) {
+            int upgradeMoney = worldmap[newPositoin]->getUpgradeMoney();
             if( worldplayer[currentPlayer].getMoney() < upgradeMoney) {
                 cout << "Sorry, you don't have enough money!  Q___Q" << endl;
                 return;
             }
-            worldplayer[currentPlayer].ModifyMoney( 0-upgradeMoney );
+            worldplayer[currentPlayer].PayMoney( upgradeMoney );
             worldmap[newPositoin]->upgrade();
+            cout << "You pay $" << upgradeMoney << " to upgrade "
+                 << worldmap[newPositoin]->getName() << " to Lv."
+                 << worldmap[newPositoin]->getLevel() << endl ;
         }
     }
 
@@ -180,17 +197,17 @@ void CGame::stepLoop()
                 }
             }
         }
-        hostPtr->ModifyMoney( fine );
-        worldplayer[currentPlayer].ModifyMoney( 0-fine );
+        hostPtr->EarnMoney( fine );
+        worldplayer[currentPlayer].PayMoney( fine );
         cout << worldplayer[currentPlayer].getName() <<", you must pay $"
              << fine << " to Player " << hostPtr->getID()
              << " (" << hostPtr->getName() << ")" << endl;
     }
 
-
     // 監獄地 \AOA/\AOA/\AOA/
     else if( hostPtr==nullptr ) {
         worldplayer[currentPlayer].Stop();
+        cout << "HaHaHa, you are in the jail now. Please take a break!" << endl;
     }
 }
 
@@ -201,4 +218,5 @@ void CGame::showEveryThing() const
     worldplayer.PrintPlayers(currentPlayer);
     cout << endl;
 }
+
 

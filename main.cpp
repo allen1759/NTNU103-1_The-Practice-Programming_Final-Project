@@ -17,7 +17,6 @@ int main()
 
     // create a new game
     CGame newGame("map.dat", num_Players);
-    //要考慮開檔失敗嗎?
     newGame.startGame();
 
     return 0;

@@ -29,6 +29,10 @@ size_t CUpgradableUnit::getUpgradeMoney() const
 {
     return upgrade_price;
 }
+size_t CUpgradableUnit::getLevel() const
+{
+    return level_;
+}
 
 
 void CUpgradableUnit::display(size_t index) const

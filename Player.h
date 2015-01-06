@@ -9,9 +9,12 @@ public:
     CPlayer () = default;
     CPlayer (size_t id,std::string name) :id_(id),name_(name) {}
     void PrintPlayer() const;
-    void Move(size_t dice, size_t numOfMapUnit);
-    bool ModifyMoney(int m);
-    // if dead return false
+    bool Move(size_t dice, size_t numOfMapUnit);
+    // if player pass the start point, return true;
+    //void ModifyMoney(int m);
+    void EarnMoney(int m);
+    void PayMoney(int m);
+
     void Dead() {dead_ = true;}
     void AddUnit();
     void AddCollUnit();
@@ -31,7 +34,7 @@ public:
     size_t location_ = 0;
 private:
     size_t id_ = 0;
-    int money_ = 30000;
+    int money_ = 3000;
     size_t num_unit_ = 0, num_coll_unit_ = 0;
     std::string name_;
     bool stop_ = false;  // in the jail or not

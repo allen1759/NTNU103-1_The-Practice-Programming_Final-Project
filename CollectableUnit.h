@@ -1,17 +1,14 @@
 #ifndef COLLECTABLEUNIT_H_INCLUDED
 #define COLLECTABLEUNIT_H_INCLUDED
 
-#include <stdio.h>
 #include "MapUnit.h"
+#include <vector>
 
 class CCollectableUnit: public CMapUnit
 {
 public:
-    CCollectableUnit(const std::string &name, size_t id,size_t numPlayer,const size_t price)
-        : CMapUnit(name, true, id, numPlayer), price_(price)
-    { }
+    CCollectableUnit(const std::string &name, size_t id,size_t numPlayer, size_t price, size_t fine);
 
-    virtual void setHost(CPlayer * playerPtr) override;
     virtual bool isCollectable() const override {return true;}
     virtual size_t getPrice() const override;
     virtual size_t getFine (size_t dice) const override;

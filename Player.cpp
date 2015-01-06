@@ -10,20 +10,29 @@ void CPlayer::PrintPlayer() const
          << " with " << num_unit_ << " units \n" ;
 }
 
-void CPlayer::Move(size_t dice, size_t numOfMapUnit)
+bool CPlayer::Move(size_t dice, size_t numOfMapUnit)
 {
     location_ += dice;
-    location_ = location_ % numOfMapUnit;
+    if( location_ >= numOfMapUnit ) {
+        location_ = location_ % numOfMapUnit;
+        return true;
+    }
+    return false;
 }
 
-bool CPlayer::ModifyMoney(int m)
+
+void CPlayer::EarnMoney(int m)
 {
     money_ += m;
+}
+
+void CPlayer::PayMoney(int m)
+{
+    money_ -= m;
     if(money_ < 0)
     {
         dead_ = true;
     }
-    return !dead_;
 }
 
 void CPlayer::AddUnit()

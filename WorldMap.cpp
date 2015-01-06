@@ -13,11 +13,11 @@ void CWorldMap::GoTo_StartPoint(size_t num)
 
 void CWorldMap::display() const
 {
-    for(size_t i=0,L1 = size()/2; i<L1; i+=1) {
+    for(size_t i=0, bound=size()/2 ; i<bound; i+=1) {
         units_[i]->display(i);
 
         std::cout << "    ";
         units_[ size()-1-i ]->display( size()-1-i );
-        std::cout <<std::endl;
+        std::cout << std::endl;
     }
 }
