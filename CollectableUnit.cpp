@@ -20,5 +20,5 @@ void CCollectableUnit::display(size_t index) const
 {
     CMapUnit::display(index);
     if(buyable_) cout << "     B$" << setw(5) << price_ << "   ";
-    else cout << " (" << host_->getID() << ") x" << host_->getcoll_unit_();
+    else cout << " (" << host_->getID() << ") x" << host_->getcoll_unit_() << "        ";
 }

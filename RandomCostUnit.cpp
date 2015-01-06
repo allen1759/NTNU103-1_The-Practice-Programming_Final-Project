@@ -17,5 +17,5 @@ void CRandomCostUnit::display(size_t index) const
 {
     CMapUnit::display(index);
     if(buyable_) cout << "     B$" << setw(5) << price_ <<"   ";
-    else cout << " (" << host_->getID() << ") ?        ";
+    else cout << " (" << host_->getID() << ") ?         ";
 }
