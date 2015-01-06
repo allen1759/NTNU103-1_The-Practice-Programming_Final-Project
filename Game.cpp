@@ -86,6 +86,7 @@ void CGame::startGame()
 {
     // alivePlayer == 0 遊戲結束 // = 1?
     while( alivePlayer != 1 ) {
+        system("pause");
         system("cls");
         showEveryThing();
 
@@ -104,9 +105,14 @@ void CGame::startGame()
 
 void CGame::stepLoop()
 {
+    //離開本來的位置
+    size_t oldPosition = worldplayer[currentID].getLocation();
+    worldmap[oldPosition]->leaveHere(currentID);
+
     dice_ = rand()%6 + 1;
     worldplayer[currentID].Move(dice_);
     size_t newPositoin = worldplayer[currentID].getLocation();
+    worldmap[newPositoin]->arriveHere(currentID);
 
     CPlayer * hostPtr = worldmap[newPositoin]->getHost();
     // 別人的土地
@@ -135,6 +141,9 @@ void CGame::stepLoop()
             worldplayer[currentID].ModifyMoney( worldmap[newPositoin]->getPrice() );
             worldmap[newPositoin]->setHost( &worldplayer[currentID] );
             worldmap[newPositoin]->setBuyable();
+            worldplayer[currentID].AddUnit();
+            cout << "You pay $" << worldmap[newPositoin]->getPrice()
+                 << " to buy " << worldmap[newPositoin]->getName() << endl ;
         }
     }
     // 監獄地 \AOA/\AOA/\AOA/
