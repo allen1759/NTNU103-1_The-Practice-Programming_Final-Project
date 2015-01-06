@@ -30,15 +30,9 @@ size_t CUpgradableUnit::getUp_price () const
 
 //狀態更動
     //賣出
-void CUpgradableUnit::NewHost(CPlayer *P1)
-{
-    host_ = P1;
-    buyable_ = false;
-    level_ = 1;
-}
-    //主人破產
-void CUpgradableUnit::bankrupt()
-{
-    level_ = 1;
-    buyable_ = true;
-}
+//void CUpgradableUnit::NewHost(CPlayer *P1)
+//{
+//    host_ = P1;
+//    buyable_ = false;
+//    level_ = 1;
+//}

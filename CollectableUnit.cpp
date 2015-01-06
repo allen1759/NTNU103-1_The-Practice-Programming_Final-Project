@@ -16,14 +16,10 @@ size_t CCollectableUnit::getFine(const size_t dice) const
 
 //狀態更動
     //賣出
-void CCollectableUnit::NewHost(CPlayer *P1)
-{
-    host_ = P1;
-    buyable_ = false;
-}
-    //主人破產
-void CCollectableUnit::bankrupt()
-{
-    host_ = nullptr;
-    buyable_ = true;
-}
+//void CCollectableUnit::NewHost(CPlayer *P1)
+//{
+//    host_ = P1;
+//    buyable_ = false;
+//}
+
+

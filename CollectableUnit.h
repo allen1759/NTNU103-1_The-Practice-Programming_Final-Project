@@ -13,8 +13,8 @@ public:
     virtual size_t getPrice() const override {return price_;}
     virtual size_t getFine(size_t dice) const override;
 
-    void NewHost(CPlayer *P1);
-    void bankrupt();
+    //void NewHost(CPlayer *P1);
+
     virtual void display(size_t index) const override {
         CMapUnit::display(index);
         if(buyable_) printf("     B$%5d",price_);

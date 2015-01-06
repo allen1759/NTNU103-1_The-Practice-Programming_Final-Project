@@ -65,10 +65,8 @@ CGame::CGame(const std::string & fileName, size_t numPlayer)
             cout << "Unknown Case!!" << endl;
         }
     }
-
     inf.close();
 
-    getchar(); //to eat the '\n'
     // initialize player part
     string playerName, default_name[4] = {"AllenYang", "HEDE0724", "CarolChen", "YuShan"};
     for(size_t i=0; i<numPlayer; i+=1) {
@@ -84,7 +82,7 @@ CGame::CGame(const std::string & fileName, size_t numPlayer)
 
 void CGame::startGame()
 {
-    // alivePlayer == 0 ¹CÀ¸µ²§ô // = 1?
+    // alivePlayer == 1 éŠæˆ²çµæŸ
     while( alivePlayer != 1 ) {
         system("pause");
         system("cls");
@@ -94,7 +92,7 @@ void CGame::startGame()
         // Dead : do nothing
         else if( worldplayer[currentID].isStop() )
             worldplayer[currentID].Continue();
-        // ¼È°±¤@½ü
+        // æš«åœä¸€è¼ª
         else {
             stepLoop();
         }
@@ -105,7 +103,7 @@ void CGame::startGame()
 
 void CGame::stepLoop()
 {
-    //Â÷¶}¥»¨Óªº¦ì¸m
+    //é›¢é–‹æœ¬ä¾†çš„ä½ç½®
     size_t oldPosition = worldplayer[currentID].getLocation();
     worldmap[oldPosition]->leaveHere(currentID);
 
@@ -114,22 +112,49 @@ void CGame::stepLoop()
     size_t newPositoin = worldplayer[currentID].getLocation();
     worldmap[newPositoin]->arriveHere(currentID);
 
+    // the host of the Map where you are
     CPlayer * hostPtr = worldmap[newPositoin]->getHost();
-    // §O¤Hªº¤g¦a
-    if( hostPtr != nullptr ) {
+
+    // åˆ¥äººçš„åœŸåœ° (should pay some money)
+    if( hostPtr != nullptr && hostPtr != &worldplayer[currentID] ) {
         int fine = worldmap[newPositoin]->getFine(dice_);
         if( fine > worldplayer[currentID].getMoney() ) {
             fine = worldplayer[currentID].getMoney();
             worldplayer[currentID].Dead();
             alivePlayer -= 1;
-            // should release all the maps
-            // hint : bankrupt funct
+            // should release all the maps which is hosted by currentID
+            for(size_t i=0; i<worldmap.size(); i+=1) {
+                if( worldmap[i]->getHost() == &worldplayer[currentID] ) {
+                    worldmap[i]->releaseMap();
+                }
+            }
         }
         hostPtr->ModifyMoney( fine );
         worldplayer[currentID].ModifyMoney( 0-fine );
     }
-    // ¥i¥H¶Rªº¤g¦a
-    else if( worldmap[newPositoin]->isBuyable() ) {
+
+    // è‡ªå·±çš„åœŸåœ° (you can upgrade your map)
+    else if( hostPtr == &worldplayer[currentID] ) {
+        if( !worldmap[newPositoin]->isUpgradable() ) return;
+
+        // upgrade your house
+        int upgradeMoney = worldmap[newPositoin]->getUpgradeMoney();
+        cout << "u can upgrade it, cost " << upgradeMoney << " yes or no?";
+
+        string option;
+        getline(cin, option);
+        if( option[0] != 'n' && option[0] != 'N' ) {
+            if( worldplayer[currentID].getMoney() < upgradeMoney) {
+                cout << "Sorry, you don't have enough money!  Q___Q" << endl;
+                return;
+            }
+            worldplayer[currentID].ModifyMoney( 0-upgradeMoney );
+            worldmap[newPositoin]->upgrade();
+        }
+    }
+
+    // æ²’æœ‰ä¸»äºº å¯ä»¥è²·çš„åœŸåœ°
+    else if( hostPtr==nullptr && worldmap[newPositoin]->isBuyable() ) {
         //cout << currentID << endl;
         cout << worldplayer[currentID].getName();
         cout <<  ", do you want to buy " << worldmap[newPositoin]->getName()  << "? ";
@@ -137,7 +162,7 @@ void CGame::stepLoop()
 
         string option;
         getline(cin, option);
-        if( option[0] != 'n' ) {
+        if( option[0] != 'n' && option[0] != 'N' ) {
             worldplayer[currentID].ModifyMoney( worldmap[newPositoin]->getPrice() );
             worldmap[newPositoin]->setHost( &worldplayer[currentID] );
             worldmap[newPositoin]->setBuyable();
@@ -146,7 +171,8 @@ void CGame::stepLoop()
                  << " to buy " << worldmap[newPositoin]->getName() << endl ;
         }
     }
-    // ºÊº»¦a \AOA/\AOA/\AOA/
+
+    // ç›£ç„åœ° \AOA/\AOA/\AOA/
     else if( hostPtr==nullptr && worldmap[newPositoin]->isBuyable()==false) {
         worldplayer[currentID].Stop();
     }

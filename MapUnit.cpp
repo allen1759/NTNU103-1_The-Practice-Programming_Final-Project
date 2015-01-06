@@ -10,17 +10,12 @@ CMapUnit::CMapUnit (std::string name, bool buy, size_t id,size_t numPlayer)
     }
 }
 
-inline size_t CMapUnit::getID() const
-{
-    return id_;
-}
-
-inline bool CMapUnit::isHostRight(const CPlayer *host)const
+bool CMapUnit::isHostRight(const CPlayer *host)const
 {
     return (host == host_);
 }
 
-inline bool CMapUnit::isHere(size_t player_id) const
+bool CMapUnit::isHere(size_t player_id) const
 {
     return who_is_here_[player_id];
 }
@@ -30,11 +25,10 @@ void CMapUnit::arriveHere(size_t player_id)
     who_is_here_[player_id] = true;
 }
 
-inline void CMapUnit::leaveHere(size_t player_id)
+void CMapUnit::leaveHere(size_t player_id)
 {
     who_is_here_[player_id] = false;
 }
-
 
 void CMapUnit::display(size_t index) const
 {

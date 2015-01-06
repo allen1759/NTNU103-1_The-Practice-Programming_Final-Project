@@ -15,17 +15,13 @@ size_t CRandomCostUnit::getFine(const size_t dice) const
 //類別內容比較
 //狀態更動
     //賣出
-void CRandomCostUnit::NewHost(CPlayer *P1)
-{
-    host_ = P1;
-    buyable_ = false;
-    return;
-}
+//void CRandomCostUnit::NewHost(CPlayer *P1)
+//{
+//    host_ = P1;
+//    buyable_ = false;
+//    return;
+//}
     //主人破產
-void CRandomCostUnit::bankrupt()
-{
-    host_ = nullptr;
-    buyable_ = true;
-}
+
 
 

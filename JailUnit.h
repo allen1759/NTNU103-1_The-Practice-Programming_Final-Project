@@ -12,9 +12,11 @@ public:
     {return 0;}
     virtual bool isBuyable() const override {return false;}
     virtual bool stopPlayer() const override {return true;}
-    virtual void display(size_t index) const override {
+    virtual void display(size_t index) const override
+    {
         CMapUnit::display(index);
     }
+    virtual void releaseMap() override {}
 
 private:
 };
