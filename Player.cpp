@@ -10,7 +10,7 @@ void CPlayer::PrintPlayer() const
          << " with " << num_unit_ << " units \n" ;
 }
 
-bool CPlayer::Move(size_t dice, size_t numOfMapUnit)
+bool CPlayer::Move(const size_t dice,const size_t numOfMapUnit)
 {
     location_ += dice;
     if( location_ >= numOfMapUnit ) {

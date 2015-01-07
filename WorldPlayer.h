@@ -8,11 +8,11 @@ class CWorldPlayer
 public:
     CWorldPlayer() {}
 
-    void GetNumOfPlayer (size_t num) { num_of_player_ = num; }
+    void GetNumOfPlayer (const size_t num) { num_of_player_ = num; }
     void AddPlayer(const size_t id,std::string name_);
-    void PrintPlayers(size_t current_id) const;
-    CPlayer & operator [] (size_t ind) {return players[ind];}
-    const CPlayer & operator [] (size_t ind) const {return players[ind];}
+    void PrintPlayers(const size_t current_id) const;
+    CPlayer & operator [] (const size_t ind) {return players[ind];}
+    const CPlayer & operator [] (const size_t ind) const {return players[ind];}
     size_t size() const { return num_of_player_;}
 
     static constexpr size_t max_num_player = 4;

@@ -20,7 +20,7 @@ void CMapUnit::leaveHere(size_t player_id)
     who_is_here_[player_id] = false;
 }
 
-void CMapUnit::display(size_t index) const
+void CMapUnit::display(const size_t index) const
 {
     std::cout << "=";
     for(size_t i=0; i<who_is_here_.size(); i+=1)

@@ -8,12 +8,12 @@ size_t CRandomCostUnit::getPrice() const
     return price_;
 }
 
-size_t CRandomCostUnit::getFine(size_t dice) const
+size_t CRandomCostUnit::getFine(const size_t dice) const
 {
     return dice * ( travel_fine_ );
 }
 
-void CRandomCostUnit::display(size_t index) const
+void CRandomCostUnit::display(const size_t index) const
 {
     CMapUnit::display(index);
     if(buyable_) cout << "     B$" << setw(5) << price_ <<"   ";

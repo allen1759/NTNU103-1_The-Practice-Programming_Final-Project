@@ -4,13 +4,13 @@
 
 using namespace std;
 
-void CWorldPlayer::AddPlayer(const size_t id,string name_)
+void CWorldPlayer::AddPlayer(const size_t id,const string name_)
 {
     CPlayer tmp(id,name_);
     players[id] = tmp;
 }
 
-void CWorldPlayer::PrintPlayers(size_t current_id) const
+void CWorldPlayer::PrintPlayers(const size_t current_id) const
 {
     for(size_t i=0; i<num_of_player_; i++)
     {

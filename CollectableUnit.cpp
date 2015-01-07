@@ -11,12 +11,12 @@ size_t CCollectableUnit::getPrice() const
 {
     return price_;
 }
-size_t CCollectableUnit::getFine(size_t dice) const
+size_t CCollectableUnit::getFine(const size_t dice) const
 {
     return host_->getcoll_unit_() * travel_fine_;
 }
 
-void CCollectableUnit::display(size_t index) const
+void CCollectableUnit::display(const size_t index) const
 {
     CMapUnit::display(index);
     if(buyable_) cout << "     B$" << setw(5) << price_ << "   ";

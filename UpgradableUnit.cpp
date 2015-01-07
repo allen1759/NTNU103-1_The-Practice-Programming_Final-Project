@@ -35,7 +35,7 @@ size_t CUpgradableUnit::getLevel() const
 }
 
 
-void CUpgradableUnit::display(size_t index) const
+void CUpgradableUnit::display(const size_t index) const
 {
     CMapUnit::display(index);
     if(buyable_) cout << "     B$" << setw(5) << price_ << "   ";

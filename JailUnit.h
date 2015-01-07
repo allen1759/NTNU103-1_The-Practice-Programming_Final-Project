@@ -9,7 +9,7 @@ public:
     CJailUnit(std::string name,size_t id,size_t numPlayer):CMapUnit(name,false,id,numPlayer){}
 
     virtual bool stopPlayer() const override {return true;}
-    virtual void display(size_t index) const override;
+    virtual void display(const size_t index) const override;
     virtual void releaseMap() override {}
 
 private:

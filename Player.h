@@ -7,9 +7,9 @@ class CPlayer
 {
 public:
     CPlayer () = default;
-    CPlayer (size_t id,std::string name) :id_(id),name_(name) {}
+    CPlayer (const size_t id,const std::string name) :id_(id),name_(name) {}
     void PrintPlayer() const;
-    bool Move(size_t dice, size_t numOfMapUnit);
+    bool Move(const size_t dice,const size_t numOfMapUnit);
     // if player pass the start point, return true;
     //void ModifyMoney(int m);
     void EarnMoney(const int m);
@@ -31,9 +31,8 @@ public:
     size_t getcoll_unit_() const {
         return num_coll_unit_;
     }
-
-    size_t location_ = 0;
 private:
+    size_t location_ = 0;
     size_t id_ = 0;
     int money_ = 3000;
     size_t num_unit_ = 0, num_coll_unit_ = 0;

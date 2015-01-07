@@ -11,8 +11,8 @@ public:
     { }
 
     virtual size_t getPrice() const override;
-    virtual size_t getFine(size_t dice) const override;
-    virtual void display(size_t index) const override;
+    virtual size_t getFine(const size_t dice) const override;
+    virtual void display(const size_t index) const override;
 
 private:
     const size_t price_= 0;

@@ -12,11 +12,11 @@ public:
 
     virtual bool isUpgradable() const override;
     virtual size_t getPrice() const override;
-    virtual size_t getFine(size_t dice) const override;
+    virtual size_t getFine(const size_t dice) const override;
     virtual size_t getUpgradeMoney() const override;
     virtual size_t getLevel() const override;
 
-    virtual void display(size_t index) const override;
+    virtual void display(const size_t index) const override;
     virtual void upgrade() override;
 
 private:

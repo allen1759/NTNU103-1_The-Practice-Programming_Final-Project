@@ -25,11 +25,11 @@ public:
     virtual bool isUpgradable() const {return false;}
     virtual bool stopPlayer() const {return false;}
     virtual size_t getPrice() const {return 0;}
-    virtual size_t getFine (size_t dice) const {return 0;}
+    virtual size_t getFine (const size_t dice) const {return 0;}
     virtual size_t getUpgradeMoney() const {return 0;}
     virtual size_t getLevel() const {return 0;}
 
-    virtual void display(size_t index) const;
+    virtual void display(const size_t index) const;
     virtual void upgrade() {}
     virtual void releaseMap();
 
