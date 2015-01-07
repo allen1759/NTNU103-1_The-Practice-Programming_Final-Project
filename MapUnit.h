@@ -9,6 +9,7 @@ class CMapUnit
 {
 public:
     CMapUnit(std::string name, bool buy, size_t id,size_t numPlayer);
+    ~CMapUnit() {}
 
     inline size_t getID() const { return id_; };
     inline CPlayer * const & getHost() const { return host_; }

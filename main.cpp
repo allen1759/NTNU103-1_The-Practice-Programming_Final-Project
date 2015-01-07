@@ -17,6 +17,7 @@ size_t Number_We_want( const string S )
     }
     return static_cast<size_t>(num);
 }
+
 int main()
 {
     srand( time(NULL) );

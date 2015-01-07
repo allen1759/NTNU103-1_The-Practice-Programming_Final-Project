@@ -8,7 +8,6 @@ void CWorldPlayer::AddPlayer(const size_t id,string name_)
 {
     CPlayer tmp(id,name_);
     players[id] = tmp;
-    num_of_player_++;
 }
 
 void CWorldPlayer::PrintPlayers(size_t current_id) const

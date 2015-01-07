@@ -6,10 +6,10 @@
 #include <vector>
 using namespace std;
 
-CGame::CGame(const std::string & fileName, size_t numPlayer)
+CGame::CGame(const string & fileName, size_t numPlayer)
 {
     // initialize map part
-    fstream inf(fileName, std::ios::in);
+    fstream inf(fileName, ios::in);
     if(!inf) return;
     string input;
     size_t currentMap = 0;
@@ -25,6 +25,8 @@ CGame::CGame(const std::string & fileName, size_t numPlayer)
         worldplayer.AddPlayer(i, playerName);
         worldmap.GoTo_StartPoint(i);
     }
+
+    worldplayer.GetNumOfPlayer(numPlayer);
     alivePlayer = numPlayer;
 }
 
@@ -87,30 +89,36 @@ void CGame::startGame()
         return;
     }
     // alivePlayer == 1 遊戲結束
-    while( alivePlayer != 1 ) {
-        system("pause");
+    while( 1 ) {
         system("cls");
         showEveryThing();
 
-        if( worldplayer[currentPlayer].isDead() );
-        // Dead : do nothing, ignore this step
-        else if( worldplayer[currentPlayer].isStop() ){
-            worldplayer[currentPlayer].Continue();
-            cout << worldplayer[currentPlayer].getName() << ", you can't move" << endl;
-        }
-        // pause one time
-        else {
-            cout << worldplayer[currentPlayer].getName() << ", your turn! GOGOGO? (1: Yes [default] / 2: No)";
-            string option;
-            getline(cin, option);
-            if(option[0] != '2') stepLoop();
-        }
         // move to next "alive" player
-        currentPlayer += 1;
-        currentPlayer %= worldplayer.size();
         while( worldplayer[currentPlayer].isDead() ) {
             currentPlayer += 1;
             currentPlayer %= worldplayer.size();
+        }
+        // pause one time
+        if( worldplayer[currentPlayer].isStop() ){
+            worldplayer[currentPlayer].Continue();
+            cout << worldplayer[currentPlayer].getName() << ", you can't move" << endl;
+        }
+        else {
+            cout << worldplayer[currentPlayer].getName() << ", your turn! GOGOGO? (1: Dice [default] / 2: Exit)";
+            string option;
+            getline(cin, option);
+            if(option[0] != '2') stepLoop();
+            else return;
+        }
+
+        currentPlayer += 1;
+        currentPlayer %= worldplayer.size();
+
+        system("pause");
+        if(AlreadyWin()) {
+            cout << "The winner is determined!" << endl;
+            system("pause");
+            return;
         }
     }
 }

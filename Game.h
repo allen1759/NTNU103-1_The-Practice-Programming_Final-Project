@@ -16,6 +16,7 @@ public:
     void startGame();
     void stepLoop();
     void showEveryThing() const;
+    bool AlreadyWin() const { return (alivePlayer==1); }
 
 private:
     static constexpr size_t MaxLevel = 5;

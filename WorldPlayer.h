@@ -7,10 +7,8 @@ class CWorldPlayer
 {
 public:
     CWorldPlayer() {}
-    size_t GetMaxNum()
-    {
-        return max_num_player;
-    }
+
+    void GetNumOfPlayer (size_t num) { num_of_player_ = num; }
     void AddPlayer(const size_t id,std::string name_);
     void PrintPlayers(size_t current_id) const;
     CPlayer & operator [] (size_t ind) {return players[ind];}
