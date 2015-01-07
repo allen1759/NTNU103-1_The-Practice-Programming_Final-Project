@@ -17,10 +17,9 @@ public:
     const CPlayer & operator [] (size_t ind) const {return players[ind];}
     size_t size() const { return num_of_player_;}
 
+    static constexpr size_t max_num_player = 4;
 private:
     size_t num_of_player_ = 0;
-    static constexpr size_t max_num_player = 4;
     CPlayer players[max_num_player];
 };
-
 #endif // WORLDPLAYER_H_INCLUDED
