@@ -16,7 +16,7 @@ public:
     inline const std::string & getName() const { return name_; }
 
     bool isBuyable() const {return buyable_;}
-    void arriveHere(size_t player_id);
+    void arriveHere(const size_t player_id);
     void leaveHere(size_t player_id);
     void setBuyable() { buyable_ = !buyable_; }
     void setHost(CPlayer * playerPtr) { host_ = playerPtr; }

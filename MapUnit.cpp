@@ -10,7 +10,7 @@ CMapUnit::CMapUnit (std::string name, bool buy, size_t id,size_t numPlayer)
     }
 }
 
-void CMapUnit::arriveHere(size_t player_id)
+void CMapUnit::arriveHere(const size_t player_id)
 {
     who_is_here_[player_id] = true;
 }

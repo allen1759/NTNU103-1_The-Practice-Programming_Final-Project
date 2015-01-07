@@ -21,12 +21,12 @@ bool CPlayer::Move(size_t dice, size_t numOfMapUnit)
 }
 
 
-void CPlayer::EarnMoney(int m)
+void CPlayer::EarnMoney(const int m)
 {
     money_ += m;
 }
 
-void CPlayer::PayMoney(int m)
+void CPlayer::PayMoney(const int m)
 {
     money_ -= m;
     if(money_ < 0)

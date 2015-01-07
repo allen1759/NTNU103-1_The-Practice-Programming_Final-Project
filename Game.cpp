@@ -88,7 +88,7 @@ void CGame::startGame()
         cout << "Start game failed, check that there is a \"map.dat\" file at the right place." << endl;
         return;
     }
-    // alivePlayer == 1 遊戲結束
+
     while( 1 ) {
         system("cls");
         showEveryThing();
@@ -115,6 +115,8 @@ void CGame::startGame()
         currentPlayer %= worldplayer.size();
 
         system("pause");
+
+        // alivePlayer == 1 遊戲結束
         if(AlreadyWin()) {
             cout << "The winner is determined!" << endl;
             system("pause");
@@ -130,6 +132,8 @@ void CGame::stepLoop()
     worldmap[oldPosition]->leaveHere(currentPlayer);
 
     dice_ = rand()%6 + 1;
+
+    //travel around the world!!
     if( worldplayer[currentPlayer].Move(dice_, worldmap.size()) ) {
         worldplayer[currentPlayer].EarnMoney( AwardMoney );
         cout << "Congratulations!!! You can get $" << AwardMoney
@@ -149,7 +153,7 @@ void CGame::stepLoop()
 
         string option;
         getline(cin, option);
-        if( option[0] != 'n' && option[0] != 'N' ) {
+        if( ! ( option[0] == '2' && option.size()==1 ) ) {
             if( worldplayer[currentPlayer].getMoney() < worldmap[newPositoin]->getPrice() ) {
                 cout << "Sorry, you don't have enough money!  Q___Q" << endl;
                 return;
@@ -176,7 +180,7 @@ void CGame::stepLoop()
 
         string option;
         getline(cin, option);
-        if( option[0] != 'n' && option[0] != 'N' ) {
+        if( !( option[0] != '2' && option.size()==1 ) ) {
             int upgradeMoney = worldmap[newPositoin]->getUpgradeMoney();
             if( worldplayer[currentPlayer].getMoney() < upgradeMoney) {
                 cout << "Sorry, you don't have enough money!  Q___Q" << endl;

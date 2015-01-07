@@ -12,8 +12,8 @@ public:
     bool Move(size_t dice, size_t numOfMapUnit);
     // if player pass the start point, return true;
     //void ModifyMoney(int m);
-    void EarnMoney(int m);
-    void PayMoney(int m);
+    void EarnMoney(const int m);
+    void PayMoney(const int m);
 
     void Dead() {dead_ = true;}
     void AddUnit();
@@ -31,6 +31,7 @@ public:
     size_t getcoll_unit_() const {
         return num_coll_unit_;
     }
+
     size_t location_ = 0;
 private:
     size_t id_ = 0;

@@ -8,11 +8,11 @@ using namespace std;
 size_t Number_We_want( const string S )
 {
     stringstream ss;
-    int num;
+    int num, Up_Limit = static_cast<int>(CWorldPlayer::max_num_player);
     ss << S;
     ss >> num;
-    if( ! (num>=1 && num<=CWorldPlayer::max_num_player) ) {
-        if(num > CWorldPlayer::max_num_player) num = CWorldPlayer::max_num_player;
+    if( ! (num>=1 && num <= Up_Limit) ) {
+        if(num > Up_Limit) num = Up_Limit;
         else num = 1;
     }
     return static_cast<size_t>(num);
