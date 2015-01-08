@@ -2,7 +2,6 @@
 #define COLLECTABLEUNIT_H_INCLUDED
 
 #include "MapUnit.h"
-#include <vector>
 
 class CCollectableUnit: public CMapUnit
 {

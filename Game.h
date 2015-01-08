@@ -2,7 +2,6 @@
 #define GAME_H_INCLUDED
 
 #include <string>
-#include <stdlib.h>
 #include "WorldMap.h"
 #include "WorldPlayer.h"
 

@@ -11,7 +11,6 @@ public:
     void PrintPlayer() const;
     bool Move(const size_t dice,const size_t numOfMapUnit);
     // if player pass the start point, return true;
-    //void ModifyMoney(int m);
     void EarnMoney(const int m);
     void PayMoney(const int m);
 

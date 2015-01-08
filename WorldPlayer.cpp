@@ -1,7 +1,6 @@
 #include <iostream>
 #include "WorldPlayer.h"
 #include "Player.h"
-
 using namespace std;
 
 void CWorldPlayer::AddPlayer(const size_t id,const string name_)

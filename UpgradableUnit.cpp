@@ -7,7 +7,7 @@ using std::setw;
 CUpgradableUnit::CUpgradableUnit(const std::string & name, size_t id, size_t numPlayer,size_t price,size_t upgrade,const std::vector<size_t> & f1)
     : CMapUnit(name, true, id, numPlayer), price_(price), upgrade_price(upgrade)
 {
-    for(int i=0,L1 = f1.size();i<L1;i++) {
+    for(size_t i=0; i<f1.size(); i+=1) {
         travel_fine_.push_back(f1[i]);
     }
 }
